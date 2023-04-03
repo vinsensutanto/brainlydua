@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSiswasTable extends Migration
+class CreateKelasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateSiswasTable extends Migration
      */
     public function up()
     {
-        Schema::create('siswas', function (Blueprint $table) {
-            $table->integer('nis')->unsigned()->length(10)->primary();
-            $table->string('kelas', 10);
+        Schema::create('kelas', function (Blueprint $table) {
+            $table->integer('id_kelas',true,true);
+            $table->integer('kelas')->unique();
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateSiswasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('siswas');
+        Schema::dropIfExists('kelas');
     }
 }

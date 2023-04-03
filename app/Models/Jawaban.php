@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Siswa extends Model
+class Jawaban extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'nis';
+    protected $primaryKey = 'id_jawaban';
     protected $guarded = [];
     
-    public function input() {
-        return $this->hasMany(Input::class);
+    public function pertanyaan(){
+        return $this->belongsTo(Pertanyaan::class);
     }
 }
