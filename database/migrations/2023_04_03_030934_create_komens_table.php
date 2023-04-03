@@ -16,9 +16,9 @@ class CreateKomensTable extends Migration
         Schema::create('komens', function (Blueprint $table) {
             $table->integer('id_komen',true,true);
             $table->string('komen');
-            $table->integer('id_pertanyaan')->unsigned();
+            $table->integer('id_pertanyaan')->unsigned()->nullable();
             $table->foreign('id_pertanyaan')->references('id_pertanyaan')->on('pertanyaans')->onDelete('restrict')->onUpdate('cascade');
-            $table->integer('id_jawaban')->unsigned();
+            $table->integer('id_jawaban')->unsigned()->nullable();
             $table->foreign('id_jawaban')->references('id_jawaban')->on('jawabans')->onDelete('restrict')->onUpdate('cascade');
             $table->timestamps();
         });

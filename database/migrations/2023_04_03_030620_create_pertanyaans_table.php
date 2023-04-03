@@ -19,9 +19,9 @@ class CreatePertanyaansTable extends Migration
             $table->enum('status', ['menunggu', 'dijawab','terjawab']);
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
-            $table->integer('id_kategori')->unsigned();
+            $table->integer('id_kategori')->unsigned()->nullable();
             $table->foreign('id_kategori')->references('id_kategori')->on('kategoris')->onDelete('restrict')->onUpdate('cascade');
-            $table->integer('id_kelas')->unsigned();
+            $table->integer('id_kelas')->unsigned()->nullable();
             $table->foreign('id_kelas')->references('id_kelas')->on('kelas')->onDelete('restrict')->onUpdate('cascade');
             $table->string('foto')->unsinged()->nullable();
             $table->timestamps();

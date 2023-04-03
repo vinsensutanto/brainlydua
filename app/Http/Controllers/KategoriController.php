@@ -26,12 +26,12 @@ class KategoriController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-        'ket_kategori'=>['required','unique:kategoris,ket_kategori', 'max:30'],
+        'kategori'=>['required','unique:kategoris,kategori', 'max:30'],
         ]);
 
 
         Kategori::create([
-            'ket_kategori'=>$request->get('ket_kategori')
+            'kategori'=>$request->get('kategori')
             ]);
 
         return redirect()->route('kategori.index')->with('message','Kategori baru berhasil dibuat');
@@ -45,12 +45,12 @@ class KategoriController extends Controller
     public function update(Request $request, $id){
        
         $this->validate($request,[
-            'ket_kategori'=>['required','unique:kategoris,ket_kategori','max:30'],
+            'kategori'=>['required','unique:kategoris,kategori','max:30'],
             ]);
 
             $kategori = Kategori::find($id);
             
-            $kategori->ket_kategori=$request->get('ket_kategori');
+            $kategori->kategori=$request->get('kategori');
             $kategori->save();
 
         return redirect()->route('kategori.index')->with('message','Kategori berhasil diubah');
