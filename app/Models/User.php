@@ -10,9 +10,11 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    protected $primaryKey = 'id';
+
 
     public function pertanyaan() {
-        return $this->hasMany(Pertanyaan::class);
+        return $this->belongsTo(Pertanyaan::class);
     }
 
     /**

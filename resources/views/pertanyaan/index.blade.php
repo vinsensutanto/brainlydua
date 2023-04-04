@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ config('app.name', 'Pengaduan Sekolah') }} | Input Pelaporan</title>
+  <title>{{ config('app.name', 'Pengaduan Sekolah') }} | pertanyaan Pelaporan</title>
 
   <link rel="icon" href="{{asset('backend/dist/img/logo-siganteng.png')}}">
 
@@ -48,9 +48,9 @@
         </a>
         <div class="navbar-search-block">
           <form class="form-inline">
-            <div class="input-group input-group-sm">
-              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
+            <div class="pertanyaan-group pertanyaan-group-sm">
+              <pertanyaan class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+              <div class="pertanyaan-group-append">
                 <button class="btn btn-navbar" type="submit">
                   <i class="fas fa-search"></i>
                 </button>
@@ -109,7 +109,7 @@
                 {{Session::get('message')}}</div>
             @endif
               <div class="card-header">                
-                <a href="{{route('input.create')}}">
+                <a href="{{route('pertanyaan.create')}}">
     <button type="button" class="btn btn-success">
     Create</button></a>
               </div>
@@ -117,56 +117,56 @@
               <div class="card-body">
                 <form action="" method="post">
                 </form>
-                <table id="tabelinput" class="table table-bordered table-striped">
+                <table id="tabelpertanyaan" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>No.</th>
                     <th>Foto</th>
                     <th>Tanggal Pelaporan</th>
-                    <th>NIS</th>
+                    <th>Pertanyaan</th>
+                    <th>status</th>
+                    <th>User</th>
                     <th>Kategori</th>
-                    <th>Lokasi</th>
-                    <th>Keterangan</th>
-                    <th>Kode</th>
+                    <th>Kelas</th>
                     <th>Aksi</th>
                     <th>Detail</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr>
-                @if(count($inputs)>0)
-                  @foreach($inputs as $input)
+                @if(count($pertanyaans)>0)
+                  @foreach($pertanyaans as $pertanyaan)
                     <td>{{ $loop->iteration }}</td>
                     <td>
-                      @if($input->foto!="tidakada")
-                        <img style="max-width:100px;"src="{{asset('foto')}}/{{$input->foto}}"/>
+                      @if($pertanyaan->foto!="none.png")
+                        <img style="max-width:100px;"src="{{asset('foto')}}/{{$pertanyaan->foto}}"/>
                       @else
                         <i>Tidak ada foto</i>
                       @endif
                     </td>
-                    <td>{{date_format($input->created_at,"Y-F-d | H:i:s a")}}</td>
-                    <td>{{$input->nis}}
+                    <td>{{date_format($pertanyaan->created_at,"Y-F-d | H:i:s a")}}</td>
+                    <td>{{$pertanyaan->pertanyaan}}
                     </td>
-                    <td>{{$input->kategori->ket_kategori}}</td>
-                    <td>{{$input->lokasi}}</td>
-                    <td>{{$input->ket}}</td>
-                    <td>{{$input->kode}}</td>
+                    <td>{{$pertanyaan->status}}</td>
+                    <td>{{$pertanyaan->user->username}}</td>
+                    <td>{{$pertanyaan->kategori->kategori}}</td>
+                    <td>{{$pertanyaan->kelas->kelas}}</td>
                     <td>
-                      <a href="{{route('input.edit',[$input->id_pelaporan])}}"><button class="btn btn-primary">Edit</button></a>
+                      <a href="{{route('pertanyaan.edit',[$pertanyaan->id_pertanyaan])}}"><button class="btn btn-primary">Edit</button></a>
                     |
                       <!-- Button trigger modal -->
-                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalinput{{$input->id_pelaporan}}">
+                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalpertanyaan{{$pertanyaan->id_pertanyaan}}">
                       Delete
                       </button>
                       <!-- Modal -->
-                      <div class="modal fade" id="modalinput{{$input->id_pelaporan}}" tabindex="-1" aria-labelledby="modalinputLabel" aria-hidden="true">
+                      <div class="modal fade" id="modalpertanyaan{{$pertanyaan->id_pertanyaan}}" tabindex="-1" aria-labelledby="modalpertanyaanLabel" aria-hidden="true">
                       <div class="modal-dialog">
-                      <form action="{{route('input.destroy',[$input->id_pelaporan])}}" method="post">
+                      <form action="{{route('pertanyaan.destroy',[$pertanyaan->id_pertanyaan])}}" method="post">
                       @csrf
                       {{method_field('DELETE')}}
                       <div class="modal-content">
                       <div class="modal-header">
-                      <h5 class="modal-title" id="modalinputLabel">Konfirmasi Penghapusan Laporan</h5>
+                      <h5 class="modal-title" id="modalpertanyaanLabel">Konfirmasi Penghapusan Laporan</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                       </button>
@@ -184,12 +184,12 @@
                       </div>
                     </td>
                     <td>
-                    <a href="{{route('input.show', [$input->id_pelaporan])}}"><button class="btn btn-outline-success"><i class="fas fa-fw fa-eye"></i></button></a>
+                    <a href="{{route('pertanyaan.show', [$pertanyaan->id_pertanyaan])}}"><button class="btn btn-outline-success"><i class="fas fa-fw fa-eye"></i></button></a>
                   </td>
                 </tr>
                   @endforeach
                   @else
-                    <td colspan="10" class="alert alert-danger">Tidak ada data input pelaporan yang dapat ditampilkan</td>
+                    <td colspan="10" class="alert alert-danger">Tidak ada data pertanyaan pelaporan yang dapat ditampilkan</td>
                   @endif
                   </tfoot>
                 </table>
@@ -232,9 +232,9 @@
 
 <script>
   $(function () {
-    $("#tabelinput").DataTable({
+    $("#tabelpertanyaan").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#tabelinput_wrapper .col-md-6:eq(0)');
+    }).buttons().container().appendTo('#tabelpertanyaan_wrapper .col-md-6:eq(0)');
   });
 </script>

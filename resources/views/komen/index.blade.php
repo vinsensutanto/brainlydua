@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ config('app.name', 'Pengaduan Sekolah') }} | Kategori</title>
+  <title>{{ config('app.name', 'Pengaduan Sekolah') }} | komen</title>
 
   <link rel="icon" href="{{asset('backend/dist/img/logo-siganteng.png')}}">
   
@@ -84,12 +84,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Kategori</h1>
+            <h1>Data komen</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-              <li class="breadcrumb-item active">kategori</li>
+              <li class="breadcrumb-item active">komen</li>
             </ol>
           </div>
         </div>
@@ -110,45 +110,47 @@
             @endif
               <div class="card-header">
                 
-                <a href="{{route('kategori.create')}}">
+                <a href="{{route('komen.create')}}">
     <button type="button" class="btn btn-success">
     Create</button></a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="tabelkategori" class="table table-bordered table-striped">
+                <table id="tabelkomen" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>No.</th>
-                    <th>ID Kategori</th>
-                    <th>Keterangan Kategori</th>
+                    <th>ID komen</th>
+                    <th>Keterangan komen</th>
+                    <th>Pertanyaan</th>
+                    <th>Jawaban</th>
                     <th>Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr>
-                @if(count($kategoris)>0)
-                  @foreach($kategoris as $kategori)
+                @if(count($komens)>0)
+                  @foreach($komens as $komen)
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{$kategori->id_kategori}}</td>
-                    <td>{{$kategori->kategori}}
+                    <td>{{$komen->id_komen}}</td>
+                    <td>{{$komen->komen}}
                     </td>
+                    <td>{{$komen->id_pertanyaan}}</td>
+                    <td>{{$komen->id_jawaban}}</td>
                     <td>
-                      <a href="{{route('kategori.edit',[$kategori->id_kategori])}}"><button class="btn btn-primary">Edit</button></a>
-                    |
                       <!-- Button trigger modal -->
-                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalkategori{{$kategori->id_kategori}}">
+                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalkomen{{$komen->id_komen}}">
                       Delete
                       </button>
                       <!-- Modal -->
-                      <div class="modal fade" id="modalkategori{{$kategori->id_kategori}}" tabindex="-1" aria-labelledby="modalkategoriLabel" aria-hidden="true">
+                      <div class="modal fade" id="modalkomen{{$komen->id_komen}}" tabindex="-1" aria-labelledby="modalkomenLabel" aria-hidden="true">
                       <div class="modal-dialog">
-                      <form action="{{route('kategori.destroy',[$kategori->id_kategori])}}" method="post">
+                      <form action="{{route('komen.destroy',[$komen->id_komen])}}" method="post">
                       @csrf
                       {{method_field('DELETE')}}
                       <div class="modal-content">
                       <div class="modal-header">
-                      <h5 class="modal-title" id="modalkategoriLabel">Konfirmasi Penghapusan Kategori</h5>
+                      <h5 class="modal-title" id="modalkomenLabel">Konfirmasi Penghapusan komen</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                       </button>
@@ -168,7 +170,7 @@
                   </tr>
                     @endforeach
                     @else
-                      <td colspan="4" class="alert alert-danger">Tidak ada data kategori yang dapat ditampilkan</td>
+                      <td colspan="4" class="alert alert-danger">Tidak ada data komen yang dapat ditampilkan</td>
                     @endif
                   </tfoot>
                 </table>
@@ -211,10 +213,10 @@
 
 <script>
   $(function () {
-    $("#tabelkategori").DataTable({
+    $("#tabelkomen").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#tabelkategori_wrapper .col-md-6:eq(0)');
+    }).buttons().container().appendTo('#tabelkomen_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,

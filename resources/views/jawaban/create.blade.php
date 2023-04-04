@@ -29,18 +29,18 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Buat Tanggapan Pelaporan</h3>
+                <h3 class="card-title">Berikan Jawaban</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{ route('aspirasi.store') }}" method="post" enctype="multipart/form-data">
+              <form action="{{ route('jawaban.store') }}" method="post" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" value="{{$pelaporan->id_pelaporan}}" name="id_pelaporan"required>
-            <input type="hidden" value="{{$pelaporan->id_kategori}}" name="id_kategori" required>
+            <input type="hidden" value="{{$pertanyaan->id_pertanyaan}}" name="id_pertanyaan"required>
+            <input type="hidden" value="{{$pertanyaan->id_user}}" name="id_user" required> {{--ini nanti diganti --}}
                 <div class="card-body">
-                  <div class="form-group"><label for="id_pelaporan">ID Pelaporan</label>    
-                    <input type="text" disabled value="{{$pelaporan->id_pelaporan}}"  class="form-control" required>
-                    @error('id_pelaporan')
+                  <div class="form-group"><label for="id_pertanyaan">ID pertanyaan</label>    
+                    <input type="text" disabled value="{{$pertanyaan->pertanyaan}}"  class="form-control" required>
+                    @error('id_pertanyaan')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -65,8 +65,8 @@
                   </div>
 
                 <div class="form-group">
-                    <label for="aspirasi">Feedback</label>
-                    <textarea name="feedback"class="form-control @error('feedback') is-invalid @enderror" value="{{ old('feedback') }}" required id="aspirasi">{{ old('aspirasi') }}</textarea>
+                    <label for="jawaban">Feedback</label>
+                    <textarea name="feedback"class="form-control @error('feedback') is-invalid @enderror" value="{{ old('feedback') }}" required id="jawaban">{{ old('jawaban') }}</textarea>
                     @error('feedback')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

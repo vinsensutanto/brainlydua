@@ -11,8 +11,8 @@ class Pertanyaan extends Model
     protected $primaryKey = 'id_pertanyaan';
     protected $guarded =[];
 
-    public function users(){
-        return $this->belongsTo(User::class,'id','id');
+    public function user(){
+        return $this->hasOne(User::class,'id','id_user');
     }
 
     public function kategori(){

@@ -29,22 +29,22 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Input Pelaporan</h3>
+                <h3 class="card-title">Ajukan Pertanyaan</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{ route('input.store') }}" method="post" enctype="multipart/form-data">
+              <form action="{{ route('pertanyaan.store') }}" method="post" enctype="multipart/form-data">
             @csrf
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="siswa">NIS</label>
-                    <select class="custom-select form-control-border" name="nis" id="siswa">
-                    @if(count($siswas)>0)
-                      @foreach($siswas as $siswa)
-                      <option value="{{$siswa->nis}}">{{$siswa->nis}}</option>
+                    <label for="kelas">Kelas</label>
+                    <select class="custom-select form-control-border" name="id_kelas" id="kelas">
+                    @if(count($kelass)>0)
+                      @foreach($kelass as $kelas)
+                      <option value="{{$kelas->id_kelas}}">{{$kelas->kelas}}</option>
                       @endforeach
                     @else
-                      <option disabled selected value="">-- Tidak ada siswa --</option>
+                      <option disabled selected value="">-- Tidak ada kelas --</option>
                     @endif
                     </select>
                   </div>
@@ -54,41 +54,32 @@
                     <select class="custom-select form-control-border" name="id_kategori" id="kategori">
                     @if(count($kategoris)>0)
                       @foreach($kategoris as $kategori)
-                      <option value="{{$kategori->id_kategori}}">{{$kategori->ket_kategori}}</option>
+                      <option value="{{$kategori->id_kategori}}">{{$kategori->kategori}}</option>
                       @endforeach
                       @else
                         <option disabled selected value="">-- Tidak ada kategori --</option>
                       @endif
                     </select>
                   </div>
-                
-                  <div class="form-group">
-                    <label for="lokasi">Lokasi</label>
-                    <input type="text" name="lokasi" maxlength="50" placeholder="Isi Lokasi" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi') }}" required id="lokasi">
-                    @error('lokasi')
-                        <span class="invalid-feedback" siswa="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
+              
                 <div class="form-group">
-                    <label for="ket">Keterangan</label>
-                    <textarea name="ket"class="form-control  @error('ket') is-invalid @enderror" value="{{ old('ket') }}" maxlength="50" required id="ket">Isi Keterangan{{ old('ket') }}</textarea>
-                    @error('ket')
-                        <span class="invalid-feedback" siswa="alert">
+                    <label for="pertanyaan">Pertanyaan</label>
+                    <textarea name="pertanyaan"class="form-control  @error('pertanyaan') is-invalid @enderror" value="{{ old('pertanyaan') }}" maxlength="50" required id="pertanyaan">Isi pertanyaan{{ old('pertanyaan') }}</textarea>
+                    @error('pertanyaan')
+                        <span class="invalid-feedback" kelas="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
                   <div class="form-group">
-                    <label for="exampleInputFile">Foto</label>
-                    <div class="input-group">
+                    <label for="examplepertanyaanFile">Foto</label>
+                    <div class="pertanyaan-group">
                       <div class="custom-file">
-                        <input name="foto" id="foto" type="file" class="custom-file-input" id="exampleInputFile">
-                        <label class="custom-file-label" name="foto" id="foto" for="exampleInputFile">Foto</label>
+                        <pertanyaan name="foto" id="foto" type="file" class="custom-file-pertanyaan" id="examplepertanyaanFile">
+                        <label class="custom-file-label" name="foto" id="foto" for="examplepertanyaanFile">Foto</label>
                       </div>
                     </div>
-                    <div class="input-group-append">
+                    <div class="pertanyaan-group-append">
                       <img id="preview" style="margin-top:10px;max-width:100px;" src="#" alt="" />
                     </div>
                   </div>

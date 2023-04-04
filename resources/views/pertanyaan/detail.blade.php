@@ -32,24 +32,28 @@
                             <table style="border:none;">
                                 <tr>
                                     <th style="width:40%;" class="detailtable">NIS</th>
-                                    <td class="detailtable"><b>: {{$inputs->siswa->nis}}</b></td>
+                                    <td class="detailtable"><b>: {{$pertanyaans->user->username}}</b></td>
                                 </tr>
                                 <tr>
                                     <th class="detailtable">Kategori</th>
-                                    <td class="detailtable"><b>: {{$inputs->kategori->ket_kategori}}</b></td>
+                                    <td class="detailtable"><b>: {{$pertanyaans->kategori->kategori}}</b></td>
+                                </tr>
+                                <tr>
+                                    <th class="detailtable">Kelas</th>
+                                    <td class="detailtable"><b>: {{$pertanyaans->kelas->kelas}}</b></td>
                                 </tr>
                                 <tr>
                                     <th class="detailtable">Status</th>
                                     <td class="detailtable"><b>:
-                                        @if (!empty($aspirasis))
-                                            @if($aspirasis->status=='menunggu')
-                                            <span class="px-3 bg-gradient-danger rounded text-white">{{$aspirasis->status}}
+                                        @if (!empty($pertanyaans))
+                                            @if($pertanyaans->status=='menunggu')
+                                            <span class="px-3 bg-gradient-danger rounded text-white">{{$pertanyaans->status}}
                                             </span>
-                                            @elseif ($aspirasis->status == 'proses')
-                                            <span class="px-3 bg-gradient-warning rounded text-white">{{ $aspirasis->status}}
+                                            @elseif ($pertanyaans->status == 'dijawab')
+                                            <span class="px-3 bg-gradient-warning rounded text-white">{{ $pertanyaans->status}}
                                             </span>
                                             @else
-                                            <span class="px-3 bg-gradient-success rounded text-white">{{$aspirasis->status}}
+                                            <span class="px-3 bg-gradient-success rounded text-white">{{$pertanyaans->status}}
                                             </span>
                                             @endif
                                         @else
@@ -59,24 +63,24 @@
                                 </tr>
                                 <tr>
                                     <th class="detailtable">Isi Laporan</th>
-                                    <td class="detailtable"><b>: {{$inputs->ket}}</b></td>
+                                    <td class="detailtable"><b>: {{$pertanyaans->pertanyaan}}</b></td>
                                 </tr>
                                 <tr>
                                     <th class="detailtable">Foto</th>
-                                    <td class="detailtable"><b>: <img src="{{asset('foto')}}/{{$inputs->foto}}" maxwidth="100px"></b></td>
+                                    <td class="detailtable"><b>: <img src="{{asset('foto')}}/{{$pertanyaans->foto}}" maxwidth="100px"></b></td>
                                 </tr>
                                 <tr>
-                                    <th class="detailtable">Tanggapan</th>
+                                    <th class="detailtable">Jawaban</th>
                                     <td class="detailtable"><b>
-                                        @if(empty($aspirasis->feedback))
+                                        @if(empty($jawabans->jawaban))
                                         <b>Belum ada Tanggapan</b>
                                         @else
-                                            @if($aspirasi!=null)
-                                                @foreach($aspirasi as $aspirasi)
-                                                <i>{{$aspirasi->created_at}}</i> -> <b>{{$aspirasi->feedback}}</b><br/>
+                                            @if($jawaban!=null)
+                                                @foreach($jawaban as $jawaban)
+                                                <i>{{$jawaban->created_at}}</i> -> <b>{{$jawaban->jawaban}}</b><br/>
                                                 @endforeach
                                             @else
-                                                <b>{{ $aspirasis->feedback }}</b>
+                                                <b>{{ $jawabans->jawaban }}</b>
                                             @endif
                                         @endif
                                     </b></td>
@@ -86,23 +90,23 @@
                         </div>
 
 
-                            @if(Auth::user())
-                                @if($aspirasis->status!=='Selesai')
-                                    @if(empty($aspirasis->feedback))
+                            {{-- @if(Auth::user()) --}}
+                                @if($pertanyaans->status!=='Selesai')
+                                    @if(empty($jawabans->jawaban))
                                         <div class="form-group"><br>
-                                            <a href="{{route('aspirasi.show',[$inputs->id_pelaporan])}}">
+                                            <a href="{{route('jawaban.show',[$pertanyaans->id_pertanyaan])}}">
                                                 <button class="btn btn-primary">Beri Tanggapan</button>
                                             </a>
                                         </div>
-                                    @elseif(!empty($aspirasis->feedback))
+                                    @elseif(!empty($jawabans->jawaban))
                                         <div class="form-group"><br>
-                                            <a href="{{route('aspirasi.show',[$aspirasis->id_pelaporan])}}">
+                                            <a href="{{route('jawaban.show',[$jawabans->id_pertanyaan])}}">
                                                 <button class="btn btn-primary">Beri Tanggapan Baru</button>
                                             </a>
                                         </div>
                                     @endif
                                 @endif
-                            @endif
+                            {{-- @endif --}}
                         </div>
                     </div>
                 </div>

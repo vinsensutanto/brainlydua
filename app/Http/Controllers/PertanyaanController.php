@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Pertanyaan;
 use App\Models\Jawaban;
 use App\Models\User;
+use App\Models\Kategori;
+use App\Models\Kelas;
 
 class PertanyaanController extends Controller
 {
     public function __construct() {
-        $this->middleware('auth', ['except' => ['store', 'cari']]);
+        // $this->middleware('auth', ['except' => ['store', 'cari']]);
     }
 
     public function index()
@@ -23,9 +25,9 @@ class PertanyaanController extends Controller
 
     public function create()
     {
-        // $users = User::get();
-        // $kategoris = Kategori::get();
-        return view ('pertanyaan.create');
+        $kelass = Kelas::get();
+        $kategoris = Kategori::get();
+        return view ('pertanyaan.create',compact('kelass','kategoris'));
     }
     /**
     * Store a newly created resource in storage.
@@ -59,7 +61,7 @@ class PertanyaanController extends Controller
         Pertanyaan::create([
             'id_user'=>$user,
             'pertanyaan'=>$request->get('pertanyaan'),
-            'status'=>$request->get('status'),
+            'status'=>'menunggu',
             'id_kategori'=>$request->get('id_kategori'),
             'id_kelas'=>$request->get('id_kelas'),
             'foto'=>$namafoto,
