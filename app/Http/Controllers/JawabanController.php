@@ -5,6 +5,7 @@ use App\Models\Jawaban;
 use App\Models\Pertanyaan;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JawabanController extends Controller
 {
@@ -54,15 +55,21 @@ class JawabanController extends Controller
             $namafoto ="none.png";
         }
 
+        if(!Auth::user()){
+            $user=0;
+        }else{
+            $user=Auth::user()->id;
+        }
+
         Jawaban::create([
             'jawaban'=>$request->get('jawaban'),
-            'id_user'=>$request->get('id_user'),
+            'id_user'=>$user,
             'id_pertanyaan'=>$request->get('id_pertanyaan'),
             'foto'=>$namafoto,
             'rating'=>0,
         ]);
         
-        return redirect()->route('jawaban.show', [$request->get('id_pertanyaan')])->with('message', 'Pertanyaan berhasil dijawab');
+        return redirect()->route('pertanyaan.show', [$request->get('id_pertanyaan')])->with('message', 'Pertanyaan berhasil dijawab');
     }
 
     /**

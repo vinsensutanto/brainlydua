@@ -3,7 +3,7 @@
     <!-- Brand Logo -->
     <a href="{{url('/home')}}" class="brand-link">
       <img src="{{asset('backend/dist/img/logo-siganteng.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">{{ config('app.name', 'Pengaduan Sekolah') }}</span>
+      <span class="brand-text font-weight-light">{{ config('app.name', 'Otak-otak') }}</span>
     </a>
 
     <!-- Sidebar -->
@@ -11,10 +11,18 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{asset('backend/dist/img/logo-siganteng.png')}}" class="img-circle elevation-2" alt="User Image">
+          @if(Auth::user())
+            @if(Auth::user()->foto!=0)
+            <img src="{{asset('user')}}/{{Auth::user()->foto}}" class="img-circle elevation-2" alt="">
+            @endif
+          @else
+            <img src="{{asset('backend/dist/img/logo-siganteng.png')}}" class="img-circle elevation-2" alt="User Image">
+          @endif
         </div>
         <div class="info">
-          {{-- <a href="#" class="d-block">{{{ isset(Auth::user()->username) ? Auth::user()->username : Auth::user()->username }}}</a> --}}
+          @if(Auth::user())
+            <a href="#" class="d-block">{{{ isset(Auth::user()->username) ? Auth::user()->username : Auth::user()->username }}}</a>
+          @endif
         </div>
       </div>
 
@@ -36,14 +44,28 @@
           <li class="nav-item">
             <a href="{{route('pertanyaan.index')}}" class="nav-link"><i class="nav-icon fas fa-th"></i>
               <p>
-                Input Pelaporan
+                Pertanyaan
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('user.index')}}" class="nav-link"><i class="nav-icon fas fa-th"></i>
+              <p>
+                User
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('komen.index')}}" class="nav-link"><i class="nav-icon fas fa-th"></i>
+              <p>
+                Komentar
               </p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{route('kelas.index')}}" class="nav-link"><i class="nav-icon fas fa-th"></i>
               <p>
-                Siswa
+                Kelas
               </p>
             </a>
           </li>
@@ -54,29 +76,8 @@
               </p>
             </a>
           </li>
-          {{-- <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Admin
-              </p>
-            </a>
-          </li> --}}
           
           <li class="nav-header">Lainnya</li>
-
-          {{-- <li class="nav-item">
-            <a href="{{url('/laporan')}}" class="nav-link">
-              <i class="nav-icon far fa-circle text-info"></i>
-              <p>Report</p>
-            </a>
-          </li> 
-          <li class="nav-item">
-            <a href="{{ url('/laporan/cetak') }}" class="nav-link">
-              <i class="nav-icon far fa-circle text-warning"></i>
-              <p class="text">Print Out</p>
-            </a>
-          </li> --}}
           <li class="nav-item">
             <a href="{{ route('logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();" class="nav-link">

@@ -58,6 +58,8 @@ class PertanyaanController extends Controller
             $namafoto ='none.png';
         }
 
+        $kode = $user.'pt'.time();
+
         Pertanyaan::create([
             'id_user'=>$user,
             'pertanyaan'=>$request->get('pertanyaan'),
@@ -65,9 +67,10 @@ class PertanyaanController extends Controller
             'id_kategori'=>$request->get('id_kategori'),
             'id_kelas'=>$request->get('id_kelas'),
             'foto'=>$namafoto,
+            'kode'=>$kode,
             ]);
-
-        return redirect()->route('pertanyaan.index')->with('message','Laporan baru berhasil dibuat dengan kode: ');
+            
+        return redirect()->route('pertanyaan.show', [$kode])->with('message','Laporan baru berhasil dibuat dengan kode: ');
     }
 
     public function edit($id_user){
@@ -133,8 +136,10 @@ class PertanyaanController extends Controller
 
     public function show($id)
     {
-        $jawaban=Jawaban::all()->where('id_pertanyaan','=', $id);
-        $jawabans=Jawaban::orderBy('created_at','DESC')->where('id_pertanyaan','=', $id)->first();
+        $pertanyaans = Pertanyaan::where('kode','=',$id)->orWhere('id_pertanyaan','=',$id)->first();
+        $id_pertanyaans = $pertanyaans->id_pertanyaan;
+        $jawaban=Jawaban::all()->where('id_pertanyaan','=', $id_pertanyaans);
+        $jawabans=Jawaban::orderBy('created_at','DESC')->where('id_pertanyaan','=', $id_pertanyaans)->first();
         if(!isset($jawabans)){
             $jawabans=null;
         }
@@ -142,7 +147,6 @@ class PertanyaanController extends Controller
             $jawaban=null;
         }
 
-    $pertanyaans = Pertanyaan::find($id);
     return view('pertanyaan.detail', compact('pertanyaans','jawabans','jawaban'));
     }
 

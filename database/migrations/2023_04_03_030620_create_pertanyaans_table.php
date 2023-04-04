@@ -18,12 +18,13 @@ class CreatePertanyaansTable extends Migration
             $table->string('pertanyaan');
             $table->enum('status', ['menunggu', 'dijawab','terjawab']);
             $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('id_kategori')->unsigned()->nullable();
-            $table->foreign('id_kategori')->references('id_kategori')->on('kategoris')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('id_kategori')->references('id_kategori')->on('kategoris')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('id_kelas')->unsigned()->nullable();
-            $table->foreign('id_kelas')->references('id_kelas')->on('kelas')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('id_kelas')->references('id_kelas')->on('kelas')->onDelete('cascade')->onUpdate('cascade');
             $table->string('foto')->unsinged()->nullable();
+            $table->string('kode');
             $table->timestamps();
         });
     }

@@ -75,7 +75,7 @@
                     <label for="examplepertanyaanFile">Foto</label>
                     <div class="pertanyaan-group">
                       <div class="custom-file">
-                        <pertanyaan name="foto" id="foto" type="file" class="custom-file-pertanyaan" id="examplepertanyaanFile">
+                        <input name="foto" id="foto" type="file" class="custom-file-pertanyaan" id="examplepertanyaanFile">
                         <label class="custom-file-label" name="foto" id="foto" for="examplepertanyaanFile">Foto</label>
                       </div>
                     </div>

@@ -17,9 +17,9 @@ class CreateKomensTable extends Migration
             $table->integer('id_komen',true,true);
             $table->string('komen');
             $table->integer('id_pertanyaan')->unsigned()->nullable();
-            $table->foreign('id_pertanyaan')->references('id_pertanyaan')->on('pertanyaans')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('id_pertanyaan')->references('id_pertanyaan')->on('pertanyaans')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('id_jawaban')->unsigned()->nullable();
-            $table->foreign('id_jawaban')->references('id_jawaban')->on('jawabans')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('id_jawaban')->references('id_jawaban')->on('jawabans')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

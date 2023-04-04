@@ -33,8 +33,8 @@ Route::get('/tentang', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('user', 'UserController')->middleware('auth');
-Route::resource('kelas', 'KelasController');
-Route::resource('kategori', 'KategoriController');
+Route::resource('kelas', 'KelasController')->middleware('auth');
+Route::resource('kategori', 'KategoriController')->middleware('auth');
 Route::resource('pertanyaan', 'PertanyaanController');
 Route::resource('komen', 'KomenController');
 Route::resource('jawaban', 'JawabanController');

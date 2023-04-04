@@ -17,9 +17,9 @@ class CreateJawabansTable extends Migration
             $table->integer('id_jawaban',true,true);
             $table->string('jawaban');
             $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('id_pertanyaan')->unsigned();
-            $table->foreign('id_pertanyaan')->references('id_pertanyaan')->on('pertanyaans')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('id_pertanyaan')->references('id_pertanyaan')->on('pertanyaans')->onDelete('cascade')->onUpdate('cascade');
             $table->string('foto')->unsinged()->nullable();
             $table->decimal('rating',2,1);
             $table->timestamps();

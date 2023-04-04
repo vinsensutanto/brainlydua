@@ -110,9 +110,6 @@
             @endif
               <div class="card-header">
                 
-                <a href="{{route('komen.create')}}">
-    <button type="button" class="btn btn-success">
-    Create</button></a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -170,7 +167,7 @@
                   </tr>
                     @endforeach
                     @else
-                      <td colspan="4" class="alert alert-danger">Tidak ada data komen yang dapat ditampilkan</td>
+                      <td colspan="6" class="alert alert-danger">Tidak ada data komen yang dapat ditampilkan</td>
                     @endif
                   </tfoot>
                 </table>

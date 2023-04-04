@@ -123,7 +123,7 @@
                                         <td><b>: {{$spesifik->siswa->nis}}</b></td>
                                     </tr>
                                     <tr>
-                                        <th class="detailtable">Kategori</th>
+                                        <th class="detailtable">kategori</th>
                                         <td><b>: {{$spesifik->kategori->ket_kategori}}</b></td>
                                     </tr>
                                     <tr>
@@ -215,11 +215,11 @@
                 <div class="col-lg-6">
                     <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
                         <h1 class="text-white mb-4">Ajukan Pertanyaan Sekarang!</h1>
-                        <form action="{{ route('input.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('pertanyaan.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row g-3">
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control bg-light border-0" name="nis" maxlength="10" value="{{ old('nis') }}" placeholder="Isi NIS" style="height: 55px;">
+                                    <textarea name="pertanyaan"class="form-control  @error('pertanyaan') is-invalid @enderror" value="{{ old('pertanyaan') }}" maxlength="50" required id="pertanyaan">Isi pertanyaan{{ old('pertanyaan') }}</textarea>
                                 </div>
                                 {{-- <div class="col-12 col-sm-6">
                                     <select class="form-select bg-light border-0" name="nis" style="height: 55px;">
@@ -238,7 +238,7 @@
                                         <option selected disabled><b>Kategori</b></option>
                                         @if(count(App\Models\Kategori::all())>0)
                                             @foreach($kategoris as $kategori)
-                                                <option value="{{$kategori->id_kategori}}">{{$kategori->ket_kategori}}</option>
+                                                <option value="{{$kategori->id_kategori}}">{{$kategori->kategori}}</option>
                                             @endforeach
                                         @else
                                                 <option disabled selected value="">-- Tidak ada kategori --</option>
@@ -246,11 +246,18 @@
                                     </select>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control bg-light border-0" name="lokasi" maxlength="50" value="{{ old('lokasi') }}" placeholder="Lokasi" style="height: 55px;">
+                                    <select class="form-select bg-light border-0" name="id_kelas" style="height: 55px;">
+                                        <option selected disabled><b>kelas</b></option>
+                                        @if(count(App\Models\Kelas::all())>0)
+                                            @foreach($kelass as $kelas)
+                                                <option value="{{$kelas->id_kelas}}">{{$kelas->kelas}}</option>
+                                            @endforeach
+                                        @else
+                                                <option disabled selected value="">-- Tidak ada kelas --</option>
+                                        @endif
+                                    </select>
                                 </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control bg-light border-0" name="ket" placeholder="Keterangan" value="{{ old('ket') }}" style="height: 55px;">
-                                </div>
+                                
                                 <div class="col-12">
                                     <h5 style="color:#e5e5e5;font-weight:bolder;text-align:left;"class="custom-file-label"><b>Foto</b><span style="font-size:10px;">&nbsp*tidak wajib</span></h5>
                                     <input name="foto" id="foto" type="file" class="custom-file-input btn btn-light w-100 py-3" id="exampleInputFile">
