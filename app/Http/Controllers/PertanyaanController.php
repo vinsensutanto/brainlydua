@@ -45,7 +45,7 @@ class PertanyaanController extends Controller
         if(!Auth::user()){
             $user=0;
         }else{
-            $user=$request->get('id_user');
+            $user=Auth::user()->id;
         }
 
         if($request->hasFile('foto')){
