@@ -37,6 +37,7 @@
             @csrf
             <input type="hidden" value="{{$pertanyaan->id_pertanyaan}}" name="id_pertanyaan"required>
             <input type="hidden" value="{{$pertanyaan->id_user}}" name="id_user" required> {{--ini nanti diganti --}}
+            <input type="hidden" value="0" name="rating"required>
                 <div class="card-body">
                   <div class="form-group"><label for="id_pertanyaan">ID pertanyaan</label>    
                     <input type="text" disabled value="{{$pertanyaan->pertanyaan}}"  class="form-control" required>
@@ -49,25 +50,9 @@
                 
                   
                 <div class="form-group">
-                  <div class="form-group">
-                      <label for="status">status</label>
-                      <select class="custom-select form-control-border @error('status') is-invalid @enderror" name="status" id="status">
-                        <option value="menunggu">Menunggu</option>
-                        <option value="proses">Proses</option>
-                        <option value="selesai">Selesai</option>
-                      </select>
-                    </div>
-                    @error('status')
-                              <span class="invalid-feedback" role="alert">
-                                  <strong>{{ $message }}</strong>
-                              </span>
-                      @enderror
-                  </div>
-
-                <div class="form-group">
-                    <label for="jawaban">Feedback</label>
-                    <textarea name="feedback"class="form-control @error('feedback') is-invalid @enderror" value="{{ old('feedback') }}" required id="jawaban">{{ old('jawaban') }}</textarea>
-                    @error('feedback')
+                    <label for="jawaban">Jawaban</label>
+                    <textarea name="jawaban"class="form-control @error('jawaban') is-invalid @enderror" value="{{ old('jawaban') }}" required id="jawaban">{{ old('jawaban') }}</textarea>
+                    @error('jawaban')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

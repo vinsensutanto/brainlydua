@@ -22,7 +22,9 @@ use App\Models\Jawaban;
 Auth::routes();
 
 Route::get('/', function () {
-    return view('welcome');
+    $kelass = Kelas::get();
+    $kategoris = Kategori::get();
+    return view('welcome',compact('kelass', 'kategoris'));
 });
 
 Route::get('/tentang', function () {
@@ -38,6 +40,6 @@ Route::resource('komen', 'KomenController');
 Route::resource('jawaban', 'JawabanController');
 Route::post('/cari','InputController@cari');
 
-Route::match(['get', 'post'], 'register', function(){
-    return redirect('/');
-    });
+// Route::match(['get', 'post'], 'register', function(){
+//     return redirect('/');
+//     });

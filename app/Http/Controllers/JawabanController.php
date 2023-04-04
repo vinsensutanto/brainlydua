@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Jawaban;
+use App\Models\Pertanyaan;
 
 use Illuminate\Http\Request;
 
@@ -39,15 +40,25 @@ class JawabanController extends Controller
             'jawaban'=>['required', 'max:1000'],
             'id_user'=>'required',
             'id_pertanyaan'=>'required',
-            'foto'=>['required|mimes:jpeg,png,jpg', 'max:255'],
+            'foto'=>['mimes:jpeg,png,jpg', 'max:255'],
             'rating'=>'required',
         ]);
+
+        if($request->hasFile('foto')){
+            $foto = $request->file('foto');
+            $namafoto = time().$request->get('id_user').'.'.$foto->getClientOriginalExtension();
+            $destinationPath = public_path('/foto');
+            $foto->move($destinationPath,$namafoto);
+            }
+        else{
+            $namafoto ="none.png";
+        }
 
         Jawaban::create([
             'jawaban'=>$request->get('jawaban'),
             'id_user'=>$request->get('id_user'),
             'id_pertanyaan'=>$request->get('id_pertanyaan'),
-            'foto'=>['required|mimes:jpeg,png,jpg', 'max:255'],
+            'foto'=>$namafoto,
             'rating'=>0,
         ]);
         
@@ -62,7 +73,7 @@ class JawabanController extends Controller
      */
     public function show($id)
     {
-        $pertanyaan = Jawaban::find($id);
+        $pertanyaan = Pertanyaan::find($id);
         return view('jawaban.create', compact('pertanyaan'));
     }
 

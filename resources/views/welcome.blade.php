@@ -94,7 +94,7 @@
 
 
     <!-- Banner Start -->
-    <div class="container-fluid">
+    {{-- <div class="container-fluid">
         <div class="container">
             <div class="row gx-0"  id="cari">
                 
@@ -194,7 +194,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Banner Start -->
 
 
@@ -214,7 +214,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
-                        <h1 class="text-white mb-4">Lakukan Pelaporan Sekarang!</h1>
+                        <h1 class="text-white mb-4">Ajukan Pertanyaan Sekarang!</h1>
                         <form action="{{ route('input.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row g-3">
