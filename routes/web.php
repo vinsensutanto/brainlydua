@@ -36,8 +36,8 @@ Route::resource('kategori', 'KategoriController');
 Route::resource('pertanyaan', 'PertanyaanController');
 Route::resource('komen', 'KomenController');
 Route::resource('jawaban', 'JawabanController');
-Route::post('/cari','InputController@cari');
+Route::post('/cari', 'InputController@cari');
 
-Route::match(['get', 'post'], 'register', function(){
+Route::match(['get', 'post'], function () {
     return redirect('/');
-    });
+});
