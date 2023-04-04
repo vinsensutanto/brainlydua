@@ -7,7 +7,6 @@ use App\Models\Kategori;
 use App\Models\Kelas;
 use App\Models\Pertanyaan;
 use App\Models\Jawaban;
-use App\Models\Aspirasi;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,31 +22,19 @@ use App\Models\Aspirasi;
 Auth::routes();
 
 Route::get('/', function () {
-    $inputs = Input::get();
-    $siswas = Siswa::get();
-    $kategoris = Kategori::get();
-    return view('welcome',compact('inputs','siswas','kategoris'));
+    return view('welcome');
 });
 
 Route::get('/tentang', function () {
-    $inputs = Input::get();
-    $siswas = Siswa::get();
-    $kategoris = Kategori::get();
-    return view('tentang',compact('inputs','siswas','kategoris'));
+    return view('tentang');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('user', 'UserController')->middleware('auth');
-Route::resource('siswa', 'SiswaController')->middleware('auth');
-Route::resource('kategori', 'KategoriController')->middleware('auth');
-Route::resource('input', 'InputController');
+Route::resource('kelas', 'KelasController');
+Route::resource('kategori', 'KategoriController');
+Route::resource('pertanyaan', 'PertanyaanController');
 Route::post('/cari','InputController@cari');
-Route::resource('aspirasi', 'AspirasiController')->middleware('auth');
-
-// Route::view('/admin', 'home');
-Route::get('/user/pengaduan', 'PengaduanController@pengaduanUser')->middleware('auth');
-Route::get('/laporan','PengaduanController@laporan')->middleware('auth');
-Route::get('/laporan/cetak','PengaduanController@pdf')->middleware('auth');
 
 Route::match(['get', 'post'], 'register', function(){
     return redirect('/');

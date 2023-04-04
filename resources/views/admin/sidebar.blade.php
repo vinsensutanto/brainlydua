@@ -14,7 +14,7 @@
           <img src="{{asset('backend/dist/img/logo-siganteng.png')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{{ isset(Auth::user()->username) ? Auth::user()->username : Auth::user()->username }}}</a>
+          {{-- <a href="#" class="d-block">{{{ isset(Auth::user()->username) ? Auth::user()->username : Auth::user()->username }}}</a> --}}
         </div>
       </div>
 
@@ -34,14 +34,14 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('input.index')}}" class="nav-link"><i class="nav-icon fas fa-th"></i>
+            <a href="{{route('pertanyaan.index')}}" class="nav-link"><i class="nav-icon fas fa-th"></i>
               <p>
                 Input Pelaporan
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('siswa.index')}}" class="nav-link"><i class="nav-icon fas fa-th"></i>
+            <a href="{{route('kelas.index')}}" class="nav-link"><i class="nav-icon fas fa-th"></i>
               <p>
                 Siswa
               </p>
