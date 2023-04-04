@@ -29,29 +29,20 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Ubah Siswa</h3>
+                <h3 class="card-title">Ubah Kategori</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{ route('siswa.update',[$siswas->nis])}}" method="post" enctype="multipart/form-data">
+              <form action="{{ route('kategori.update',[$kategoris->id_kategori])}}" method="post" enctype="multipart/form-data">
             @csrf
             {{method_field('PUT')}}
 
               <div class="card-body">
-                <div class="form-group">
-                    <label for="nis">NIS</label>
-                    <input type="text" placeholder="Isi NIS" name="nis" maxlength="10" class="form-control @error('nis') is-invalid @enderror" value="{{$siswas->nis}}" required id="nis">
-                    @error('nis')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
 
                 <div class="form-group">
-                    <label for="kelas">Kelas</label>
-                    <input type="text" placeholder="Isi Kelas" name="kelas" maxlength="10" class="form-control @error('kelas') is-invalid @enderror" value="{{$siswas->kelas}}" required id="kelas">
-                    @error('kelas')
+                    <label for="kategori">Keterangan Kategori</label>
+                    <input type="text" placeholder="kategori" maxlength="30" name="kategori" class="form-control @error('kategori') is-invalid @enderror" value="{{$kategoris->kategori}}" required id="kategori">
+                    @error('kategori')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

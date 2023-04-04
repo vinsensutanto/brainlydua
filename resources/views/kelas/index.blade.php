@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ config('app.name', 'PengaduanSekolah') }} | Siswa</title>
+  <title>{{ config('app.name', 'PengaduanSekolah') }} | Otak-otak</title>
 
   <link rel="icon" href="{{asset('backend/dist/img/logo-siganteng.png')}}">
 
@@ -84,12 +84,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Siswa</h1>
+            <h1>Data kelas</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-              <li class="breadcrumb-item active">Siswa</li>
+              <li class="breadcrumb-item active">kelas</li>
             </ol>
           </div>
         </div>
@@ -110,45 +110,45 @@
             @endif
               <div class="card-header">
                 
-                <a href="{{route('siswa.create')}}">
+                <a href="{{route('kelas.create')}}">
     <button type="button" class="btn btn-success">
     Create</button></a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="tabelsiswa" class="table table-bordered table-striped">
+                <table id="tabelkelas" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>No.</th>
-                    <th>NIS</th>
+                    <th>ID</th>
                     <th>Kelas</th>
                     <th>Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr>
-                @if(count($siswas)>0)
-                  @foreach($siswas as $siswa)
+                @if(count($kelass)>0)
+                  @foreach($kelass as $kelas)
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{$siswa->nis}}</td>
-                    <td>{{$siswa->kelas}}
+                    <td>{{$kelas->id_kelas}}</td>
+                    <td>{{$kelas->kelas}}
                     </td>
                     <td>
-                      <a href="{{route('siswa.edit',[$siswa->nis])}}"><button class="btn btn-primary">Edit</button></a>
+                      <a href="{{route('kelas.edit',[$kelas->id_kelas])}}"><button class="btn btn-primary">Edit</button></a>
                     |
                       <!-- Button trigger modal -->
-                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalsiswa{{$siswa->nis}}">
+                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalkelas{{$kelas->id_kelas}}">
                       Delete
                       </button>
                       <!-- Modal -->
-                      <div class="modal fade" id="modalsiswa{{$siswa->nis}}" tabindex="-1" aria-labelledby="modalsiswaLabel" aria-hidden="true">
+                      <div class="modal fade" id="modalkelas{{$kelas->id_kelas}}" tabindex="-1" aria-labelledby="modalkelasLabel" aria-hidden="true">
                       <div class="modal-dialog">
-                      <form action="{{route('siswa.destroy',[$siswa->nis])}}" method="post">
+                      <form action="{{route('kelas.destroy',[$kelas->id_kelas])}}" method="post">
                       @csrf
                       {{method_field('DELETE')}}
                       <div class="modal-content">
                       <div class="modal-header">
-                      <h5 class="modal-title" id="modalsiswaLabel">Konfirmasi Penghapusan Siswa</h5>
+                      <h5 class="modal-title" id="modalkelasLabel">Konfirmasi Penghapusan kelas</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                       </button>
@@ -168,7 +168,7 @@
                   </tr>
                   @endforeach
                   @else
-                    <td colspan="4" class="alert alert-danger">Tidak ada data siswa yang dapat ditampilkan</td>
+                    <td colspan="4" class="alert alert-danger">Tidak ada data kelas yang dapat ditampilkan</td>
                   @endif
                   </tfoot>
                 </table>
@@ -211,10 +211,10 @@
 
 <script>
   $(function () {
-    $("#tabelsiswa").DataTable({
+    $("#tabelkelas").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#tabelsiswa_wrapper .col-md-6:eq(0)');
+    }).buttons().container().appendTo('#tabelkelas_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,

@@ -29,23 +29,13 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Tambah Siswa</h3>
+                <h3 class="card-title">Tambah kelas</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{ route('siswa.store') }}" method="post" enctype="multipart/form-data">
+              <form action="{{ route('kelas.store') }}" method="post" enctype="multipart/form-data">
             @csrf
                 <div class="card-body">
-                  
-                <div class="form-group">
-                    <label for="nis">NIS</label>
-                    <input type="text" placeholder="Isi NIS" maxlength="10" name="nis" class="form-control @error('nis') is-invalid @enderror" value="{{ old('nis') }}" required id="nis">
-                    @error('nis')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
                 <div class="form-group">
                     <label for="kelas">Kelas</label>
                     <input type="text" placeholder="Isi Kelas" name="kelas" maxlength="10" class="form-control @error('kelas') is-invalid @enderror" value="{{ old('kelas') }}" required id="kelas">

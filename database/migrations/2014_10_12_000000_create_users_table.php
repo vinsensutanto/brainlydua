@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->integer('rating');
             $table->string('password');
             $table->string('foto')->unsinged()->nullable();
-            $table->enum('pangkat', ['awam','si paling bantu','si paling bener','si paling pinter','otakers','admin']);
+            $table->enum('pangkat', ['awam','otakers','admin']);
             $table->rememberToken();
             $table->timestamp('username_verified_at')->nullable();
             $table->timestamps();

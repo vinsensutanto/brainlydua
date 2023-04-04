@@ -29,20 +29,19 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Ubah Kategori</h3>
+                <h3 class="card-title">Ubah kelas</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{ route('kategori.update',[$kategoris->id_kategori])}}" method="post" enctype="multipart/form-data">
+              <form action="{{ route('kelas.update',[$kelass->id_kelas])}}" method="post" enctype="multipart/form-data">
             @csrf
             {{method_field('PUT')}}
 
               <div class="card-body">
-
                 <div class="form-group">
-                    <label for="kategori">Keterangan Kategori</label>
-                    <input type="text" placeholder="kategori" maxlength="30" name="kategori" class="form-control @error('kategori') is-invalid @enderror" value="{{$kategoris->kategori}}" required id="kategori">
-                    @error('kategori')
+                    <label for="kelas">Kelas</label>
+                    <input type="text" placeholder="Isi Kelas" name="kelas" maxlength="10" class="form-control @error('kelas') is-invalid @enderror" value="{{$kelass->kelas}}" required id="kelas">
+                    @error('kelas')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
