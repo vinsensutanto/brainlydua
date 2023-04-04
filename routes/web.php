@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\Input;
-use App\Models\Siswa;
 use App\Models\Kategori;
+use App\Models\Kelas;
+use App\Models\Pertanyaan;
+use App\Models\Jawaban;
 use App\Models\Aspirasi;
 
 /*
