@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
 
@@ -42,12 +43,18 @@ class UserController extends Controller
             $namafoto ='none.png';
         }
 
+        if($request->get('pangkat')){
+            $pangkat=$request->get('pangkat');
+        }else{
+            $pangkat=0;
+        }
+
         User::create([
             'username'=>$request->get('username'),
             'email'=>$request->get('email'),
             'rating'=>0,
-            'password'=>$request->get('password'),
-            'pangkat'=>'awam',
+            'password'=>Hash::make($request->get('password')),
+            'pangkat'=>$pangkat,
             'foto'=>$namafoto,
             ]);
 
@@ -61,14 +68,16 @@ class UserController extends Controller
     
     public function update(Request $request, $id){
        
+        $user = User::find($id);
+        $username=$user->username;
+        $email=$user->email;
+
         $this->validate($request,[
-            'username'=>['required','unique:users,username', 'max:30'],
-            'email'=>['required','unique:users,email', 'max:30'],
-            'password'=>['required'],
+            'username'=>['required','unique:users,username,'.$username.',username', 'max:30'],
+            'email'=>['required','unique:users,email,'.$email.',email', 'max:30'],
             'foto'=>['mimes:jpeg,png,jpg'],
         ]);
 
-            $user = User::find($id);
 
             if($request->hasFile('foto')){
                 $foto = $request->file('foto');
@@ -81,10 +90,10 @@ class UserController extends Controller
             }
 
             if($request->get('password')){
-                $pw = $request->get('password');
+                $pw = Hash::make($request->get('password'));
                 }
             else{
-                $pw =$user->password;
+                $pw = Hash::make($user->password);
             }
 
             $user->username=$request->get('username');
