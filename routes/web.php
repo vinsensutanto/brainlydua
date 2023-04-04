@@ -43,7 +43,3 @@ Route::post('/cari', 'InputController@cari');
 // Route::match(['get', 'post'], 'register', function(){
 //     return redirect('/');
 //     });
-
-Route::match(['get', 'post'], 'register', function(){
-    return redirect('/');
-    });
