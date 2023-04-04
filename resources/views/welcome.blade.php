@@ -236,7 +236,7 @@
                                 <div class="col-12 col-sm-6">
                                     <select class="form-select bg-light border-0" name="id_kategori" style="height: 55px;">
                                         <option selected disabled><b>Kategori</b></option>
-                                        @if(count($kategoris)>0)
+                                        @if(count(App\Models\Kategori::all())>0)
                                             @foreach($kategoris as $kategori)
                                                 <option value="{{$kategori->id_kategori}}">{{$kategori->ket_kategori}}</option>
                                             @endforeach

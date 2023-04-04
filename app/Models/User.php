@@ -13,7 +13,8 @@ class User extends Authenticatable
     protected $primaryKey = 'id';
 
 
-    public function pertanyaan() {
+    public function pertanyaan()
+    {
         return $this->belongsTo(Pertanyaan::class);
     }
 
@@ -22,10 +23,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'username',
-        'password',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
