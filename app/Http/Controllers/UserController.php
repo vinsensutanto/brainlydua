@@ -5,18 +5,27 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth', ['except' => ['edit', 'update']]);
+    }
+
     public function index()
     {
-    $users = User::get();
-    return view('user.index', compact('users'));
+        if(Auth::user()->pangkat=="admin"){
+            $users = User::get();
+            return view('user.index', compact('users'));
+        }
     }
 
     public function create()
     {
+        if(Auth::user()->pangkat=="admin"){
         return view ('user.create');
+        }
     }
     /**
     * Store a newly created resource in storage.
@@ -62,12 +71,17 @@ class UserController extends Controller
     }
 
     public function edit($id){
-        $users = User::find($id);
-        return view('user.edit',compact('users'));
+        if(Auth::user()->pangkat=="admin" || (Auth::check() && Auth::user()->id==$id)){
+            $users = User::find($id);
+            return view('user.edit',compact('users'));
+        }else{
+            return redirect()->back();
+        }
     }
     
-    public function update(Request $request, $id){
-       
+    public function update(Request $request, $id)
+    {
+        if(Auth::user()->pangkat=="admin"){   
         $user = User::find($id);
         $username=$user->username;
         $email=$user->email;
@@ -104,14 +118,17 @@ class UserController extends Controller
             $user->save();
 
         return redirect()->route('user.index')->with('message','user berhasil diubah');
+        }
     }
 
     
     public function destroy($id)
     {
+        if(Auth::user()->pangkat=="admin"){
     $user = User::find($id);
     $user->delete();
 
     return redirect()->route('user.index')->with('message','user berhasil dihapus');
+    }
     }
 }
