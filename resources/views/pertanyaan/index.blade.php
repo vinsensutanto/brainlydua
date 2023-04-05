@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="{{asset('backend/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('backend/dist/css/adminlte.min.css')}}">
+  <script defer src="https://unpkg.com/mathlive"></script>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
