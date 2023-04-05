@@ -157,18 +157,65 @@ class PertanyaanController extends Controller
     }
 
     public function cari(Request $request)
-	{
+	{   
+        if($request->get('kelas')){
+        $kelas=$request->get('kelas');
+        $spesifik = Pertanyaan::where('id_kelas','=',$kelas)->get();
+            if($request->get('kategori')){
+                $kategori=$request->get('kategori');
+                $spesifik = Pertanyaan::where('id_kelas','=',$kelas)->where('id_kategori','=',$kategori)->get();
+                if($request->get('cari')){
+                    $id=$request->get('cari');
+                    $spesifik = Pertanyaan::where('id_kelas','=',$kelas)->where('id_kategori','=',$kategori)->where('pertanyaan', 'LIKE', "%{$id}%")->get();
+                    if($request->get('status')){
+                        $status=$request->get('status');
+                        $spesifik = Pertanyaan::where('id_kelas','=',$kelas)->where('id_kategori','=',$kategori)->where('pertanyaan', 'LIKE', "%{$id}%")->where('status','=',$status)->get();
+                        }
+                    }
+                if($request->get('status')){
+                    $status=$request->get('status');
+                    $spesifik = Pertanyaan::where('id_kelas','=',$kelas)->where('id_kategori','=',$kategori)->where('status','=',$status)->get();
+                    }
+            }elseif($request->get('cari')){
+                $id=$request->get('cari');
+                $spesifik = Pertanyaan::where('id_kelas','=',$kelas)->where('pertanyaan', 'LIKE', "%{$id}%")->get();
+                if($request->get('status')){
+                    $status=$request->get('status');
+                    $spesifik = Pertanyaan::where('id_kelas','=',$kelas)->where('pertanyaan', 'LIKE', "%{$id}%")->where('status','=',$status)->get();
+                    }
+                }
+        }elseif($request->get('kategori')){
+        $kategori=$request->get('kategori');
+        $spesifik = Pertanyaan::where('id_kategori','=',$kategori)->get();
+            if($request->get('cari')){
+            $id=$request->get('cari');
+            $spesifik = Pertanyaan::where('id_kategori','=',$kategori)->where('pertanyaan', 'LIKE', "%{$id}%")->get();
+            if($request->get('status')){
+                $status=$request->get('status');
+                $spesifik = Pertanyaan::where('id_kategori','=',$kategori)->where('pertanyaan', 'LIKE', "%{$id}%")->where('status','=',$status)->get();
+                }
+            }
+        }elseif($request->get('cari')){
         $id=$request->get('cari');
-		$spesifik = Pertanyaan::where('kode','=',$id)->first();
-
-        $jawaban=Jawaban::all()->where('id_pertanyaan','=', $spesifik->id_pertanyaan);
-        $jawabans=Jawaban::orderBy('created_at','DESC')->where('id_pertanyaan','=', $spesifik->id_pertanyaan)->first();
-
-        //esensial buat form
-        $pertanyaans = Pertanyaan::get();
+        $spesifik = Pertanyaan::where('pertanyaan', 'LIKE', "%{$id}%")->get();
+        if($request->get('status')){
+            $status=$request->get('status');
+            $spesifik = Pertanyaan::where('pertanyaan', 'LIKE', "%{$id}%")->where('status','=',$status)->get();
+            }
+        }elseif($request->get('status')){
+            $status=$request->get('status');
+            $spesifik = Pertanyaan::where('status','=',$status)->get();
+        }
+        if(isset($spesifik)){
+		$pertanyaans=$spesifik->take(7);
+        }else{
+            $pertanyaans = Pertanyaan::get();
+        }
         $users = User::get();
-        // $kategoris = Kategori::get();
-		return view('welcome',compact('spesifik','jawabans','jawaban','pertanyaans','users'));
+        $kelass = Kelas::get();
+        $kategoris = Kategori::get();
+        
+		return view('welcome',compact('pertanyaans','users','kelass','kategoris'));
  
 	}
 }

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Pengaduan Sekolah - Ujian Sertifikasi Hari ini!</title>
+    <title>Otak-otak | Website mirip Brainly</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -53,6 +53,18 @@
       color:aqua;
       font-weight:bold;
     }
+    .pertanyaan{
+        width:100%;
+        margin:10px 10px 10px 0px; 
+        padding:10px;
+    }
+    .btn{
+        margin:0px 10px 0px 10px;
+        padding:10px;
+        width: fit-content;
+        font-size:1vw;
+        float:right;
+    }
   </style>
 </head>
 
@@ -65,11 +77,11 @@
           <!-- <img class="" src="{{asset('frontend/assets/img/logo.png')}}" alt="Imperial"> -->
         </div>
 
-        <h1>Selamat Datang di Pengaduan Sekolah</h1>
-        <h2>Kami <span class="typed" data-typed-items="Melayani dengan Baik, Membantu dan Mendampingi, Mendengarkan Aspirasi Siswa"></span></h2>
+        <h1>Selamat Datang di Otak-otak!</h1>
+        <h2>Kami <span class="typed" data-typed-items="Menampung pertanyaan kalian, Mencoba menjawab, Membuka tempat diskusi"></span></h2>
         <div class="actions">
-          <a href="#cari" class="btn-get-started">Mulai Sekarang</a>
-          <a href="/tentang" class="btn-services">Tentang Kami</a>
+          <a href="#cari" class="btn-get-started">Mulai Bertanya Sekarang</a>
+          <a href="/tentang" class="btn-services">Coba Jawab Pertanyaan</a>
         </div>
       </div>
     </div>
@@ -78,7 +90,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="{{ route('login') }}" class="navbar-brand p-0">
-            <h1 class="m-0 text-primary"><img style="width:8%" src="{{asset('frontend/img/logo.png')}}">&nbsp;Pengaduan Sekolah</h1>
+            <h1 class="m-0 text-primary"><img style="width:8%" src="{{asset('frontend/img/logo.png')}}">&nbsp;Otak-otak</h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -87,114 +99,132 @@
             <div class="navbar-nav ms-auto py-0">
                 <a href="/" class="nav-item nav-link active">Home</a>
                 </div>
-            <a href="#lapor" class="btn btn-primary py-2 px-4 ms-3">Pelaporan</a>
+            <a href="#lapor" class="btn btn-primary py-2 px-4 ms-3">Cari Pertanyaan yang sudah terjawab!</a>
         </div>
     </nav>
     <!-- Navbar End -->
 
 
     <!-- Banner Start -->
-    {{-- <div class="container-fluid">
+    <div class="container-fluid">
         <div class="container">
             <div class="row gx-0"  id="cari">
                 
-                <div class="col-lg-5 wow zoomIn" data-wow-delay="0.3s">
+                @if(Session::has('message'))
+                <div class="alert alert-success">
+                    {{Session::get('message')}}</div>
+                @endif
+                <div class="col-lg-4 wow zoomIn" data-wow-delay="0.3s">
                     <div class="bg-dark d-flex flex-column p-5" style="height: 300px;">
-                        <h3 class="text-white mb-3">Cari Tau Status Pelaporan</h3>
-                        <p class="text-white mb-3" style="font-size:15px;">*Masukan kode unik pelaporan kalian untuk melihat tanggapan dan status pelaporan kalian.</p>
+                        <h3 class="text-white mb-3">Filter Pertanyaan</h3>
                         <form action="/cari" method="post">
                             @csrf
+                            <table><tr><td>
+                            <div class="date mb-3 form-group">
+                                <select class="custom-select form-control-border" name="kelas" id="kelas">
+                                @if(count($kelass)>0)
+                                <option disabled selected>Semua Kelas</option>
+                                  @foreach($kelass as $kelas)
+                                  <option value="{{$kelas->id_kelas}}">{{$kelas->kelas}}</option>
+                                  @endforeach
+                                @else
+                                  <option disabled selected>-- Tidak ada kelas --</option>
+                                @endif
+                                </select>
+                              </div>
+                            </td><td>
+                              <div class="date mb-3 form-group">
+                                <select class="custom-select form-control-border" name="kategori" id="kategori">
+                                @if(count($kategoris)>0)
+                                    <option disabled selected>Semua Kategori</option>
+                                  @foreach($kategoris as $kategori)
+                                  <option value="{{$kategori->id_kategori}}">{{$kategori->kategori}}</option>
+                                  @endforeach
+                                  @else
+                                    <option disabled selected>-- Tidak ada kategori --</option>
+                                  @endif
+                                </select>
+                              </div>
+                            </td></tr><tr><td colspan="2">
                         <div class="date mb-3" id="date" data-target-input="nearest">
                             <input type="text" class="form-control bg-light border-0 datetimepicker-input"
-                            name="cari" placeholder="Masukan Kode Pelaporan" value="{{ old('cari') }}"style="height: 40px;">
+                            name="cari" placeholder="Cari pertanyaan" value="{{ old('cari') }}"style="height: 40px;">
                         </div>
-                        
+                    </td></tr><tr><td>
+                        <div class=" date mb-3 form-group">
+                            <select class="custom-select form-control-border" name="status" id="status">
+                            <option disabled selected>Semua Status</option>
+                              <option value="menunggu">Menunggu</option>
+                              <option value="dijawab">Dijawab</option>
+                              <option value="terjawab">Terjawab</option>
+                            </select>
+                          </div>
+                        </td><td>
                         <input type="submit" class="btn btn-light">
+                        </td></tr></table>
                         </form>
                     </div>
                 </div>
-                <div class="col-lg-7 wow zoomIn" data-wow-delay="0.6s">
+                <div class="col-lg-8 wow zoomIn" data-wow-delay="0.6s">
                     <div class="bg-secondary d-flex flex-column p-5">
-                        <h3 class="text-white">Hasil Pencarian</h3>
-                            @if(!empty($spesifik))
-                                <table style="border:none;color:white;">
+                        <h3 class="text-white">List Pertanyaan</h3>
+                            @foreach($pertanyaans as $pertanyaan)
+                                <div class="row pertanyaan" style="background-color:white">
+                                    <span><b>{{$pertanyaan->user->username}}</b> - {{$pertanyaan->kategori->kategori}} kelas {{$pertanyaan->kelas->kelas}} - {{$pertanyaan->created_at->diffForHumans()}}</span>
+                                    <p style="margin-top:10px;margin-bottom:10px;">{{\Illuminate\Support\Str::limit($pertanyaan->pertanyaan, 150, $end = '...')}}</p>
+                                    @if($pertanyaan->status!=="terjawab")
+                                        <a href="{{route('pertanyaan.show', [$pertanyaan->id_pertanyaan])}}">
+                                        <button type="button" class="btn btn-success">Jawab</button></a>
+                                    @endif
+                                </div>
+                            @endforeach
+                                
+                                {{-- <table style="border:none;color:white;">
                                     <tr>
                                         <th style="width:30%;" class="detailtable">NIS</th>
-                                        <td><b>: {{$spesifik->siswa->nis}}</b></td>
+                                        <td><b>: </b></td>
                                     </tr>
                                     <tr>
                                         <th class="detailtable">kategori</th>
-                                        <td><b>: {{$spesifik->kategori->ket_kategori}}</b></td>
+                                        <td><b>: </b></td>
                                     </tr>
                                     <tr>
                                         <th class="detailtable">Status</th>
                                         <td><b>: 
-                                            @if (!empty($aspirasis))
-                                                @if($aspirasis->status=='menunggu')
-                                                <span class="px-3 bg-gradient-danger rounded text-white">{{$aspirasis->status}}
+                                            
+                                                
+                                                <span class="px-3 bg-gradient-danger rounded text-white">status
                                                 </span>
-                                                @elseif ($aspirasis->status == 'proses')
-                                                <span class="px-3 bg-gradient-warning rounded text-white">{{ $aspirasis->status}}
-                                                </span>
-                                                @else
-                                                <span class="px-3 bg-gradient-success rounded text-white">{{$aspirasis->status}}
-                                                </span>
-                                                @endif
-                                            @else
-                                                <span class="px-3 bg-gradient-invalid rounded text-white">Belum Ditanggapi
-                                                </span>
-                                            @endif
                                         </b></td>
                                     </tr>
                                     <tr>
                                         <th class="detailtable">Isi Laporan</th>
-                                        <td><b>: {{$spesifik->ket}}</b></td>
+                                        <td><b>: </b></td>
                                     </tr>
                                     <tr>
                                         <th class="detailtable">Foto</th>
-                                        <td><b>: <img src="{{asset('foto')}}/{{$spesifik->foto}}" style="width:100px;"></b></td>
+                                        <td><b>: <img src="{{asset('foto')}}/" style="width:100px;"></b></td>
                                     </tr>
                                     <tr>
                                         <td colspan="2"><b>
-                                            @if(empty($aspirasis->feedback))
-                                            <b>Belum ada Tanggapan</b>
-                                            @else
-                                                @if($aspirasi!=null)
-                                                    @foreach($aspirasi as $aspirasi)
-                                                    <i>{{$aspirasi->created_at}}</i> -> <b>{{$aspirasi->feedback}}</b><br/>
-                                                    @endforeach
-                                                @else
-                                                    <b>{{ $aspirasis->feedback }}</b>
-                                                @endif
-                                            @endif
+                                            
+                                                    <i>waktu</i> -> <b>feedback</b><br/>
                                         </b></td>
                                     </tr>
-                                </table>
+                                </table> --}}
 
                             </div>
 
 
-                                @if(Auth::user())
-                                @if(empty($aspirasis->feedback))
                                 <div class="form-group"><br>
-                                    <a href="{{route('aspirasi.show',[$spesifik->id_pelaporan])}}">
+                                    <a href="">
                                         <button class="btn btn-primary">Beri Tanggapan</button>
                                     </a>
-
-                                @else
-                                <div class="form-group"><br>
-                                    <a href="{{route('aspirasi.show',[$aspirasis->id_pelaporan])}}">
-                                        <button class="btn btn-primary">Beri Tanggapan Baru</button>
-                                    </a>
-                                </div>
-                                @endif
-                                @endif
-                            @endif
                     </div>
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     <!-- Banner Start -->
 
 

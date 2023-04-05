@@ -15,7 +15,7 @@ class CreatePertanyaansTable extends Migration
     {
         Schema::create('pertanyaans', function (Blueprint $table) {
             $table->integer('id_pertanyaan',true,true);
-            $table->string('pertanyaan');
+            $table->string('pertanyaan','500');
             $table->enum('status', ['menunggu', 'dijawab','terjawab']);
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
