@@ -234,12 +234,6 @@
                                 </table> --}}
 
                             </div>
-
-
-                                <div class="form-group"><br>
-                                    <a href="">
-                                        <button class="btn btn-primary">Beri Tanggapan</button>
-                                    </a>
                     </div>
                 </div>
             </div>

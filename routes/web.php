@@ -34,7 +34,7 @@ Route::post('/list', function (Request $request) {
     $kategoris = Kategori::get();
     if($request->get('cari')){
         $id=$request->get('cari');
-        $pertanyaans = Pertanyaan::where('pertanyaan', 'LIKE', "%{$id}%")->get();
+        $pertanyaans = Pertanyaan::where('pertanyaan', 'LIKE', "%{$id}%")->where('status','=','terjawab')->orWhere('status','=','dijawab')->get();
     return view('welcome',compact('kelass', 'kategoris','pertanyaans'));
     }else{
         $pertanyaans = Pertanyaan::get()->paginate(7);

@@ -45,7 +45,7 @@ class UserController extends Controller
         if($request->hasFile('foto')){
             $foto = $request->file('foto');
             $namafoto = time().$request->get('id_user').'.'.$foto->getClientOriginalExtension();
-            $destinationPath = public_path('/foto');
+            $destinationPath = public_path('/user');
             $foto->move($destinationPath,$namafoto);
             }
         else{
@@ -96,7 +96,7 @@ class UserController extends Controller
             if($request->hasFile('foto')){
                 $foto = $request->file('foto');
                 $namafoto = time().$request->get('id_user').'.'.$foto->getClientOriginalExtension();
-                $destinationPath = public_path('/foto');
+                $destinationPath = public_path('/user');
                 $foto->move($destinationPath,$namafoto);
                 }
             else{
