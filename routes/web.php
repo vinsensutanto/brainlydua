@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Http\Request;
 use App\Models\Kategori;
 use App\Models\Kelas;
 use App\Models\Pertanyaan;
@@ -28,8 +29,17 @@ Route::get('/', function () {
     return view('welcome',compact('kelass', 'kategoris','pertanyaans'));
 });
 
-Route::get('/tentang', function () {
-    return view('tentang');
+Route::post('/list', function (Request $request) {
+    $kelass = Kelas::get();
+    $kategoris = Kategori::get();
+    if($request->get('cari')){
+        $id=$request->get('cari');
+        $pertanyaans = Pertanyaan::where('pertanyaan', 'LIKE', "%{$id}%")->get();
+    return view('welcome',compact('kelass', 'kategoris','pertanyaans'));
+    }else{
+        $pertanyaans = Pertanyaan::get()->paginate(7);
+        return view('welcome',compact('kelass', 'kategoris','pertanyaans'));
+    }
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -40,7 +50,8 @@ Route::resource('pertanyaan', 'PertanyaanController');
 Route::resource('komen', 'KomenController');
 Route::resource('jawaban', 'JawabanController');
 Route::post('/cari', 'PertanyaanController@cari');
+Route::post('/cari', 'PertanyaanController@cari');
 
-// Route::match(['get', 'post'], 'register', function(){
-//     return redirect('/');
-//     });
+Route::match(['get', 'post'], 'register', function(){
+    return redirect('/');
+    });

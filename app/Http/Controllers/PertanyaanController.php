@@ -209,7 +209,7 @@ class PertanyaanController extends Controller
         if(isset($spesifik)){
 		$pertanyaans=$spesifik->take(7);
         }else{
-            $pertanyaans = Pertanyaan::get();
+            $pertanyaans = Pertanyaan::get()->paginate(7);
         }
         $users = User::get();
         $kelass = Kelas::get();

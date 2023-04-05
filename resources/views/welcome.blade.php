@@ -99,11 +99,31 @@
             <div class="navbar-nav ms-auto py-0">
                 <a href="/" class="nav-item nav-link active">Home</a>
                 </div>
-            <a href="#lapor" class="btn btn-primary py-2 px-4 ms-3">Cari Pertanyaan yang sudah terjawab!</a>
+            <a href="" data-bs-toggle="modal" data-bs-target="#searchModal" class="btn btn-primary py-2 px-4 ms-3">Cari Pertanyaan yang sudah terjawab!</a>
         </div>
     </nav>
     <!-- Navbar End -->
 
+        <!-- Full Screen Search Start -->
+        <div class="modal fade" id="searchModal" tabindex="-1">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content" style="background: rgba(9, 30, 62, .7);">
+                    <div class="modal-header border-0">
+                        <button type="button" class="btn bg-white btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex align-items-center justify-content-center">
+                        <div class="input-group" style="max-width: 600px;">
+                            <form action="/list" method="post">
+                                @csrf
+                            <input type="text" name="cari" style="width:100%;" class="form-control bg-transparent border-primary p-3" placeholder="Cari jawabannya!">
+                            <button type="submit" class="btn btn-primary px-4"><i class="bi bi-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Full Screen Search End -->
 
     <!-- Banner Start -->
     <div class="container-fluid">
