@@ -31,5 +31,32 @@
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('backend/dist/js/pages/dashboard2.js')}}"></script>
+
+<!-- Include the Quill library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<!-- Initialize Quill editor -->
+<script>
+  var quill = new Quill('#editor', {
+    theme: 'snow'
+  });
+  quill.on('text-change', function(delta, oldDelta, source) {
+    document.querySelector("input[name='pertanyaan']").value = quill.root.innerHTML+"<math-field read-only>"+mf.value+"</math-field>";
+  });
+  
+  const mf = document.getElementById("formula");
+  const latex = document.getElementById("pertanyaan");
+
+  mf.addEventListener("input",(ev) => latex.value = quill.root.innerHTML+"<math-field read-only>"+mf.value+"</math-field>");
+
+  latex.value = quill.root.innerHTML+"<math-field read-only>"+mf.value+"</math-field>";
+
+  // Listen for changes in the "latex" text field, and reflect its value in
+  // the mathfield.
+
+  latex.addEventListener("input", (ev) =>
+  mf.setValue( ev.target.value, {suppressChangeNotifications: true})
+  );
+</script>
 </body>
 </html>

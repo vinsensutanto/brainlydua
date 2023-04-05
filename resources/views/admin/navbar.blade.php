@@ -15,6 +15,11 @@
   <link rel="stylesheet" href="{{asset('backend/dist/css/adminlte.min.css')}}">
 
   <link rel="icon" href="{{asset('backend/dist/img/logo-siganteng.png')}}">
+  
+  <!-- Include stylesheet -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <script defer src="https://unpkg.com/mathlive"></script>
+
 <style>
   .detailtable{
   padding-bottom:10px;    

@@ -145,7 +145,7 @@
                       @endif
                     </td>
                     <td>{{date_format($pertanyaan->created_at,"Y-F-d | H:i:s a")}}</td>
-                    <td>{{$pertanyaan->pertanyaan}}
+                    <td><?php echo $pertanyaan['pertanyaan']; ?>
                     </td>
                     <td>{{$pertanyaan->status}}</td>
                     <td>{{$pertanyaan->user->username}}</td>

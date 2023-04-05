@@ -64,7 +64,9 @@
               
                 <div class="form-group">
                     <label for="pertanyaan">Pertanyaan</label>
-                    <textarea name="pertanyaan"class="form-control  @error('pertanyaan') is-invalid @enderror" value="{{ old('pertanyaan') }}" maxlength="50" required id="pertanyaan">Isi pertanyaan{{ old('pertanyaan') }}</textarea>
+                    <div id="editor"></div>
+                    <math-field id="formula" style="width:100%;"></math-field>
+                    <input type="hidden" name="pertanyaan"class="form-control  @error('pertanyaan') is-invalid @enderror" value="{{ old('pertanyaan') }}" maxlength="50" required id="pertanyaan">
                     @error('pertanyaan')
                         <span class="invalid-feedback" kelas="alert">
                             <strong>{{ $message }}</strong>
