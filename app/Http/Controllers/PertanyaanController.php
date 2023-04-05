@@ -19,8 +19,10 @@ class PertanyaanController extends Controller
 
     public function index()
     {
+        if(Auth::user()->pangkat=="admin"){
     $pertanyaans = Pertanyaan::get();
     return view('pertanyaan.index', compact('pertanyaans'));
+        }
     }
 
     public function create()
@@ -74,14 +76,15 @@ class PertanyaanController extends Controller
     }
 
     public function edit($id_user){
+        if(Auth::user()->pangkat=="admin"){
         $pertanyaans = Pertanyaan::find($id_user);
-        // $users = User::get();
-        // $kategoris = Kategori::get();
         return view('pertanyaan.edit',compact('pertanyaans'));
+        }
     }
     
-    public function update(Request $request, $id){
-       
+    public function update(Request $request, $id)
+    {
+        if(Auth::user()->pangkat=="admin"){   
         $this->validate($request,[
             'pertanyaan'=>['max:1000'],
             'foto'=>['mimes:jpeg,png,jpg'],
@@ -123,15 +126,18 @@ class PertanyaanController extends Controller
             $pertanyaan->save();
 
         return redirect()->route('pertanyaan.index')->with('message','Laporan berhasil diubah');
+        }
     }
 
     
     public function destroy($id)
     {
+        if(Auth::user()->pangkat=="admin"){
     $pertanyaan = Pertanyaan::find($id);
     $pertanyaan->delete();
 
     return redirect()->route('pertanyaan.index')->with('message','Laporan berhasil dihapus');
+        }
     }
 
     public function show($id)
@@ -165,10 +171,4 @@ class PertanyaanController extends Controller
 		return view('welcome',compact('spesifik','jawabans','jawaban','pertanyaans','users'));
  
 	}
-
-    public function laporan()
-    {
-        $pertanyaans = Pertanyaan::latest()->get();
-        return view('pertanyaan.laporan',compact('pertanyaans'));
-    }
 }

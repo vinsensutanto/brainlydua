@@ -37,6 +37,7 @@ class JawabanController extends Controller
      */
     public function store(Request $request)
     {
+        if(Auth::user()->pangkat=="admin"){
         $this->validate($request, [
             'jawaban'=>['required', 'max:1000'],
             'id_user'=>'required',
@@ -70,6 +71,7 @@ class JawabanController extends Controller
         ]);
         
         return redirect()->route('pertanyaan.show', [$request->get('id_pertanyaan')])->with('message', 'Pertanyaan berhasil dijawab');
+        }
     }
 
     /**
