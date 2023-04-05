@@ -63,7 +63,7 @@
                                 </tr>
                                 <tr>
                                     <th class="detailtable">Isi Laporan</th>
-                                    <td class="detailtable"><b>: {{$pertanyaans->pertanyaan}}</b></td>
+                                    <td class="detailtable"><b>: <?php echo $pertanyaans['pertanyaan']; ?></b></td>
                                 </tr>
                                 <tr>
                                     <th class="detailtable">Foto</th>
