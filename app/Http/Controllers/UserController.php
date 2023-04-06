@@ -17,14 +17,14 @@ class UserController extends Controller
     {
         if(Auth::user()->pangkat=="admin"){
             $users = User::get();
-            return view('user.index', compact('users'));
+            return view('otakers.index', compact('users'));
         }
     }
 
     public function create()
     {
         if(Auth::user()->pangkat=="admin"){
-        return view ('user.create');
+        return view ('otakers.create');
         }
     }
     /**
@@ -73,7 +73,7 @@ class UserController extends Controller
     public function edit($id){
         if(Auth::user()->pangkat=="admin" || (Auth::check() && Auth::user()->id==$id)){
             $users = User::find($id);
-            return view('user.edit',compact('users'));
+            return view('otakers.edit',compact('users'));
         }else{
             return redirect()->back();
         }
