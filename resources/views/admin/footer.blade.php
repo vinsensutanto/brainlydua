@@ -41,15 +41,15 @@
     theme: 'snow'
   });
   quill.on('text-change', function(delta, oldDelta, source) {
-    document.querySelector("input[name='pertanyaan']").value = quill.root.innerHTML+"<math-field read-only>"+mf.value+"</math-field>";
+    document.querySelector("input[name='pertanyaan']").value = quill.root.innerHTML+"<math-field read-only style='border:none'>"+mf.value+"</math-field>";
   });
   
   const mf = document.getElementById("formula");
   const latex = document.getElementById("pertanyaan");
 
-  mf.addEventListener("input",(ev) => latex.value = quill.root.innerHTML+"<math-field read-only>"+mf.value+"</math-field>");
+  mf.addEventListener("input",(ev) => latex.value = quill.root.innerHTML+"<math-field read-only style='border:none'>"+mf.value+"</math-field>");
 
-  latex.value = quill.root.innerHTML+"<math-field read-only>"+mf.value+"</math-field>";
+  latex.value = quill.root.innerHTML+"<math-field read-only style='border:none'>"+mf.value+"</math-field>";
 
   // Listen for changes in the "latex" text field, and reflect its value in
   // the mathfield.

@@ -13,7 +13,7 @@
         <div class="image">
           @if(Auth::user())
             @if(Auth::user()->foto!=0)
-            <img src="{{asset('user')}}/{{Auth::user()->foto}}" class="img-circle elevation-2" alt="">
+            <img src="{{asset('fotouser')}}/{{Auth::user()->foto}}" class="img-circle elevation-2" alt="">
             @endif
           @else
             <img src="{{asset('backend/dist/img/logo-siganteng.png')}}" class="img-circle elevation-2" alt="User Image">
@@ -21,7 +21,7 @@
         </div>
         <div class="info">
           @if(Auth::user())
-            <a href="#" class="d-block">{{{ isset(Auth::user()->username) ? Auth::user()->username : Auth::user()->username }}}</a>
+            <a href="{{ url('/profile') }}/{{Auth::user()->id}}" class="d-block">{{{ isset(Auth::user()->username) ? Auth::user()->username : Auth::user()->username }}}</a>
           @endif
         </div>
       </div>

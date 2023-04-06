@@ -51,6 +51,7 @@ Route::resource('komen', 'KomenController');
 Route::resource('jawaban', 'JawabanController');
 Route::post('/cari', 'PertanyaanController@cari');
 Route::post('/rating/{rating}','JawabanController@rating');
+Route::get('/profile/{id}', 'UserController@profile');
 
 Route::match(['get', 'post'], 'register', function(){
     return redirect('/');

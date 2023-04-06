@@ -46,6 +46,10 @@
   <link href="{{asset('frontend/assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
   <link href="{{asset('frontend/assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
 
+  <!-- Include stylesheet -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <script defer src="https://unpkg.com/mathlive"></script>
+  
   <!-- Template Main CSS File -->
   <link href="{{asset('frontend/assets/css/style.css')}}" rel="stylesheet">
   <style>
@@ -191,7 +195,7 @@
                             @foreach($pertanyaans as $pertanyaan)
                                 <div class="row pertanyaan" style="background-color:white">
                                     <span><b>{{$pertanyaan->user->username}}</b> - {{$pertanyaan->kategori->kategori}} kelas {{$pertanyaan->kelas->kelas}} - {{$pertanyaan->created_at->diffForHumans()}}</span>
-                                    <p style="margin-top:10px;margin-bottom:10px;">{{\Illuminate\Support\Str::limit($pertanyaan->pertanyaan, 150, $end = '...')}}</p>
+                                    <p style="margin-top:10px;margin-bottom:10px;"><?php echo $pertanyaan['pertanyaan']; ?></p>
                                     @if($pertanyaan->status!=="terjawab")
                                         <a href="{{route('pertanyaan.show', [$pertanyaan->id_pertanyaan])}}">
                                         <button type="button" class="btn btn-success">Jawab</button></a>
@@ -262,8 +266,10 @@
                         <form action="{{ route('pertanyaan.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row g-3">
-                                <div class="col-12 col-sm-6">
-                                    <textarea name="pertanyaan"class="form-control  @error('pertanyaan') is-invalid @enderror" value="{{ old('pertanyaan') }}" maxlength="50" required id="pertanyaan">Isi pertanyaan{{ old('pertanyaan') }}</textarea>
+                                <div class="">
+                                    <div id="editor" style="height:40%;">Isi Pertanyaan</div>
+                                    <math-field id="formula" style="width:100%;"></math-field>
+                                    <input type="hidden" name="pertanyaan" id="pertanyaan" class="form-control  @error('pertanyaan') is-invalid @enderror" value="{{ old('pertanyaan') }}" maxlength="50" required>
                                 </div>
                                 {{-- <div class="col-12 col-sm-6">
                                     <select class="form-select bg-light border-0" name="nis" style="height: 55px;">
@@ -400,6 +406,33 @@ foto.onchange = evt => {
 
   <!-- Template Main JS File -->
   <script src="{{asset('frontend/assets/js/main.js')}}"></script>
+  
+<!-- Include the Quill library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<!-- Initialize Quill editor -->
+<script>
+  var quill = new Quill('#editor', {
+    theme: 'snow'
+  });
+  quill.on('text-change', function(delta, oldDelta, source) {
+    document.querySelector("input[name='pertanyaan']").value = quill.root.innerHTML+"<math-field read-only style='border:none'>"+mf.value+"</math-field>";
+  });
+  
+  const mf = document.getElementById("formula");
+  const latex = document.getElementById("pertanyaan");
+
+  mf.addEventListener("input",(ev) => latex.value = quill.root.innerHTML+"<math-field read-only style='border:none'>"+mf.value+"</math-field>");
+
+  latex.value = quill.root.innerHTML+"<math-field read-only style='border:none'>"+mf.value+"</math-field>";
+
+  // Listen for changes in the "latex" text field, and reflect its value in
+  // the mathfield.
+
+  latex.addEventListener("input", (ev) =>
+  mf.setValue( ev.target.value, {suppressChangeNotifications: true})
+  );
+</script>
 </body>
 
 </html>
