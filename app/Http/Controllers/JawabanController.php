@@ -37,7 +37,6 @@ class JawabanController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::user()->pangkat=="admin"){
         $this->validate($request, [
             'jawaban'=>['required', 'max:1000'],
             'id_user'=>'required',
@@ -71,7 +70,6 @@ class JawabanController extends Controller
         ]);
         
         return redirect()->route('pertanyaan.show', [$request->get('id_pertanyaan')])->with('message', 'Pertanyaan berhasil dijawab');
-        }
     }
 
     /**
@@ -118,5 +116,24 @@ class JawabanController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function rating(Request $request, $id)
+    {
+        $this->validate($request, [
+            'rating'=>'required',
+        ]);
+        $jawaban = Jawaban::find($id);
+        $rateawal=$request->get('rating');
+        $ratedb=$jawaban->rating;
+        if($ratedb==0){
+            $rateakhir=$rateawal;
+        }else{
+            $rateakhir=($jawaban->rating+$rateawal)/2;
+        }
+        $jawaban->rating=$rateakhir;
+        $jawaban->save();
+
+        return redirect()->route('pertanyaan.show', [$jawaban->id_pertanyaan])->with('message', 'Rating berhasil dijawab');
     }
 }

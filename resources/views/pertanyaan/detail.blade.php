@@ -48,6 +48,11 @@
 
   <!-- Template Main CSS File -->
   <link href="{{asset('frontend/assets/css/style.css')}}" rel="stylesheet">
+
+  
+  <!-- Include stylesheet -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <script defer src="https://unpkg.com/mathlive"></script>
   <style>
     .service-title{
       color:aqua;
@@ -65,6 +70,9 @@
         font-size:1vw;
         float:right;
     }
+    input[type=radio] {
+    display: inline!important;
+    }
   </style>
 </head>
 <body>
@@ -76,12 +84,6 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto py-0">
-                <a href="/" class="nav-item nav-link active">Home</a>
-                </div>
-            <a href="" data-bs-toggle="modal" data-bs-target="#searchModal" class="btn btn-primary py-2 px-4 ms-3">Cari Pertanyaan yang sudah terjawab!</a>
-        </div>
     </nav>
     <!-- Navbar End -->
 
@@ -119,84 +121,63 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <img src="{{asset('user')}}/{{$pertanyaan->foto}}" style="max-width:50px;"/>
-                        <p>{{$pertanyaans->user->username}}</p>
+                        <img src="{{asset('user')}}/{{$pertanyaans->foto}}" style="max-width:50px;float:left;margin-right:15px;"/>
+                        <p style="font-size:12px;">{{$pertanyaans->user->username}} | {{$pertanyaans->created_at}} - {{$pertanyaans->kategori->kategori}} - Kelas {{$pertanyaans->kelas->kelas}} </p>
+                        <h6><?php echo $pertanyaans->pertanyaan?></h6>
+                        
+                        @if($pertanyaans->foto!== "none.png")
+                            <img src="{{asset('foto')}}/{{$pertanyaans->foto}}" style="max-width:100px;"/>
+                        @endif
                     </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <table style="border:none;">
-                                <tr>
-                                    <th style="width:40%;" class="detailtable">NIS</th>
-                                    <td class="detailtable"><b>: {{$pertanyaans->user->username}}</b></td>
-                                </tr>
-                                <tr>
-                                    <th class="detailtable">Kategori</th>
-                                    <td class="detailtable"><b>: {{$pertanyaans->kategori->kategori}}</b></td>
-                                </tr>
-                                <tr>
-                                    <th class="detailtable">Kelas</th>
-                                    <td class="detailtable"><b>: {{$pertanyaans->kelas->kelas}}</b></td>
-                                </tr>
-                                <tr>
-                                    <th class="detailtable">Status</th>
-                                    <td class="detailtable"><b>:
-                                        @if (!empty($pertanyaans))
-                                            @if($pertanyaans->status=='menunggu')
-                                            <span class="px-3 bg-gradient-danger rounded text-white">{{$pertanyaans->status}}
-                                            </span>
-                                            @elseif ($pertanyaans->status == 'dijawab')
-                                            <span class="px-3 bg-gradient-warning rounded text-white">{{ $pertanyaans->status}}
-                                            </span>
-                                            @else
-                                            <span class="px-3 bg-gradient-success rounded text-white">{{$pertanyaans->status}}
-                                            </span>
-                                            @endif
-                                        @else
-                                            <span class="px-3 bg-gradient-invalid rounded text-white">Belum Ditanggapi</span>
+                                @if(empty($jawabans->jawaban))
+                                <div class="card-body">
+                                        <p>
+                                    <b>Belum ada Jawaban</b>
+                                    </p>
+                                @else
+                                    @if($jawaban!=null)
+                                        @foreach($jawaban as $jawab)
+                                        <div class="card-body" style="border:5px solid #b1b1b1;margin-bottom:10px;">
+                                            <img src="{{asset('user')}}/{{$jawab->user->foto}}" style="max-width:50px;float:left;margin-right:15px;"/>
+                                            <p style="font-size:12px;">{{$jawab->user->username}} | {{$jawab->created_at}}</p>
+                                                <p>
+                                                <b><?php echo $jawab->jawaban ?></b><br/>
+                                            </p>
+                                        @if($jawab->foto!== "none.png")
+                                            <img src="{{asset('foto')}}/{{$jawab->foto}}" style="max-width:100px;"/>
                                         @endif
-                                    </b></td>
-                                </tr>
-                                <tr>
-                                    <th class="detailtable">Isi Laporan</th>
-                                    <td class="detailtable"><b>: <?php echo $pertanyaans['pertanyaan']; ?></b></td>
-                                </tr>
-                                <tr>
-                                    <th class="detailtable">Foto</th>
-                                    <td class="detailtable"><b>: <img src="{{asset('foto')}}/{{$pertanyaans->foto}}" maxwidth="100px"></b></td>
-                                </tr>
-                                <tr>
-                                    <th class="detailtable">Jawaban</th>
-                                    <td class="detailtable"><b>
-                                        @if(empty($jawabans->jawaban))
-                                        <b>Belum ada Tanggapan</b>
-                                        @else
-                                            @if($jawaban!=null)
-                                                @foreach($jawaban as $jawaban)
-                                                <i>{{$jawaban->created_at}}</i> -> <b>{{$jawaban->jawaban}}</b><br/>
-                                                @endforeach
-                                            @else
-                                                <b>{{ $jawabans->jawaban }}</b>
+                                            @if(Auth::user())
+                                            <form action="../rating/{{$jawab->id_jawaban}}" method="post" enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="radio" name="rating" value="1">1  &nbsp
+                                                <input type="radio" name="rating" value="2">2  &nbsp
+                                                <input type="radio" name="rating" value="3">3  &nbsp
+                                                <input type="radio" name="rating" value="4">4  &nbsp
+                                                <input type="radio" name="rating" value="5">5  &nbsp
+                                                <button type="submit">Beri Rating!</button>
+                                            </form>
                                             @endif
-                                        @endif
-                                    </b></td>
-                                </tr>
-                            </table>
-
-                        </div>
+                                        </div>
+                                        @endforeach
+                                    @else
+                                        <b><?php echo $jawabans->jawaban ?></b>
+                                </div>
+                                    @endif
+                                @endif
 
 
                             {{-- @if(Auth::user()) --}}
-                                @if($pertanyaans->status!=='Selesai')
+                                @if($pertanyaans->status!=='terjawab')
                                     @if(empty($jawabans->jawaban))
                                         <div class="form-group"><br>
                                             <a href="{{route('jawaban.show',[$pertanyaans->id_pertanyaan])}}">
-                                                <button class="btn btn-primary">Beri Tanggapan</button>
+                                                <button class="btn btn-primary">Jawab Soal ini</button>
                                             </a>
                                         </div>
                                     @elseif(!empty($jawabans->jawaban))
                                         <div class="form-group"><br>
                                             <a href="{{route('jawaban.show',[$jawabans->id_pertanyaan])}}">
-                                                <button class="btn btn-primary">Beri Tanggapan Baru</button>
+                                                <button class="btn btn-primary">Berikan Jawaban yang lebih baik</button>
                                             </a>
                                         </div>
                                     @endif
@@ -287,6 +268,34 @@ foto.onchange = evt => {
 
   <!-- Template Main JS File -->
   <script src="{{asset('frontend/assets/js/main.js')}}"></script>
+
+  
+<!-- Include the Quill library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<!-- Initialize Quill editor -->
+<script>
+  var quill = new Quill('#editor', {
+    theme: 'snow'
+  });
+  quill.on('text-change', function(delta, oldDelta, source) {
+    document.querySelector("input[name='pertanyaan']").value = quill.root.innerHTML+"<math-field read-only>"+mf.value+"</math-field>";
+  });
+  
+  const mf = document.getElementById("formula");
+  const latex = document.getElementById("pertanyaan");
+
+  mf.addEventListener("input",(ev) => latex.value = quill.root.innerHTML+"<math-field read-only>"+mf.value+"</math-field>");
+
+  latex.value = quill.root.innerHTML+"<math-field read-only>"+mf.value+"</math-field>";
+
+  // Listen for changes in the "latex" text field, and reflect its value in
+  // the mathfield.
+
+  latex.addEventListener("input", (ev) =>
+  mf.setValue( ev.target.value, {suppressChangeNotifications: true})
+  );
+</script>
 </body>
 
 </html>

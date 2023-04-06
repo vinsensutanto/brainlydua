@@ -14,4 +14,8 @@ class Jawaban extends Model
     public function pertanyaan(){
         return $this->belongsTo(Pertanyaan::class);
     }
+    
+    public function user(){
+        return $this->hasOne(User::class,'id','id_user');
+    }
 }

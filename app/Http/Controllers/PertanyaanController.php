@@ -14,7 +14,7 @@ use App\Models\Kelas;
 class PertanyaanController extends Controller
 {
     public function __construct() {
-        $this->middleware('auth', ['except' => ['store', 'create']]);
+        $this->middleware('auth', ['except' => ['store', 'create','show','cari']]);
     }
 
     public function index()

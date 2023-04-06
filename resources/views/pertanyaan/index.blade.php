@@ -50,7 +50,7 @@
         <div class="navbar-search-block">
           <form class="form-inline">
             <div class="pertanyaan-group pertanyaan-group-sm">
-              <pertanyaan class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
               <div class="pertanyaan-group-append">
                 <button class="btn btn-navbar" type="submit">
                   <i class="fas fa-search"></i>
