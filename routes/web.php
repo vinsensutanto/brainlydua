@@ -50,7 +50,7 @@ Route::resource('pertanyaan', 'PertanyaanController');
 Route::resource('komen', 'KomenController');
 Route::resource('jawaban', 'JawabanController');
 Route::post('/cari', 'PertanyaanController@cari');
-Route::post('/rating/{rating}','JawabanController@rating');
+Route::post('/rating/{rating}','RatingController@store');
 
 Route::match(['get', 'post'], 'register', function(){
     return redirect('/');

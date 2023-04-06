@@ -540,6 +540,7 @@ class ComposerStaticInitd4f1910678f960771f310e7748e834ec
         'App\\Models\\Kelas' => __DIR__ . '/../..' . '/app/Models/Kelas.php',
         'App\\Models\\Komen' => __DIR__ . '/../..' . '/app/Models/Komen.php',
         'App\\Models\\Pertanyaan' => __DIR__ . '/../..' . '/app/Models/Pertanyaan.php',
+        'App\\Models\\Rating' => __DIR__ . '/../..' . '/app/Models/Rating.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
