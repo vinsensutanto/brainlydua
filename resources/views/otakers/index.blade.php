@@ -136,7 +136,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>
                       @if($user->foto!="none.png")
-                        <img style="max-width:100px;"src="{{asset('foto')}}/{{$user->foto}}"/>
+                        <img style="max-width:100px;"src="{{asset('fotouser')}}/{{$user->foto}}"/>
                       @else
                         <i>Tidak ada foto</i>
                       @endif

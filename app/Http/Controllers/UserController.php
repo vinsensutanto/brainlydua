@@ -21,6 +21,11 @@ class UserController extends Controller
         }
     }
 
+    public function profile($id){
+        $users = User::find($id);
+        return view('otakers.profile',compact('users'));
+    }
+
     public function create()
     {
         if(Auth::user()->pangkat=="admin"){
@@ -45,7 +50,7 @@ class UserController extends Controller
         if($request->hasFile('foto')){
             $foto = $request->file('foto');
             $namafoto = time().$request->get('id_user').'.'.$foto->getClientOriginalExtension();
-            $destinationPath = public_path('/user');
+            $destinationPath = public_path('/fotouser');
             $foto->move($destinationPath,$namafoto);
             }
         else{
@@ -96,7 +101,7 @@ class UserController extends Controller
             if($request->hasFile('foto')){
                 $foto = $request->file('foto');
                 $namafoto = time().$request->get('id_user').'.'.$foto->getClientOriginalExtension();
-                $destinationPath = public_path('/user');
+                $destinationPath = public_path('/fotouser');
                 $foto->move($destinationPath,$namafoto);
                 }
             else{
