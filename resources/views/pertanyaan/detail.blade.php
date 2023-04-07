@@ -146,6 +146,8 @@
                                         @if($jawab->foto!== "none.png")
                                             <img src="{{asset('foto')}}/{{$jawab->foto}}" style="max-width:100px;"/>
                                         @endif
+                                        <span style="font-size:12px;">
+                                        <p>Rating : {{$jawab->rating}} dari {{App\Models\Rating::ratingcount($jawab->id_jawaban)}} user</p>
                                             @if(Auth::user())
                                             <form action="../rating/{{$jawab->id_jawaban}}" method="post" enctype="multipart/form-data">
                                                 @csrf
@@ -157,6 +159,7 @@
                                                 <button type="submit">Beri Rating!</button>
                                             </form>
                                             @endif
+                                        </span>
                                         </div>
                                         @endforeach
                                     @else
@@ -164,7 +167,6 @@
                                 </div>
                                     @endif
                                 @endif
-
 
                             {{-- @if(Auth::user()) --}}
                                 @if($pertanyaans->status!=='terjawab')
@@ -175,11 +177,19 @@
                                             </a>
                                         </div>
                                     @elseif(!empty($jawabans->jawaban))
+                                    <?php 
+                                    $highest=App\Models\Jawaban::where('id_pertanyaan','=', $pertanyaans->id_pertanyaan)->orderBy('rating', 'desc')->first();
+                                    $count=App\Models\Rating::where('id_jawaban','=',$highest->id_jawaban)->count();
+                                    $total=App\Models\Rating::where('id_jawaban','=',$highest->id_jawaban)->where('id_user','=',$highest->id_user)->sum('rating');
+                                    ?>
+                                        @if($count<=0)
                                         <div class="form-group"><br>
                                             <a href="{{route('jawaban.show',[$jawabans->id_pertanyaan])}}">
                                                 <button class="btn btn-primary">Berikan Jawaban yang lebih baik</button>
                                             </a>
                                         </div>
+                                        @elseif($total/$count>4)
+                                        @endif
                                     @endif
                                 @endif
                             {{-- @endif --}}

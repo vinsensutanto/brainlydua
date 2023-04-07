@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Rating;
 use App\Models\Jawaban;
+use App\Models\Pertanyaan;
 use Illuminate\Support\Facades\Auth;
 
 class RatingController extends Controller
@@ -37,35 +38,50 @@ class RatingController extends Controller
      */
     public function store(Request $request, $id)
     {
+        $user=Auth::user()->id;
+        $conn=mysqli_connect("localhost","root","","otak");
+        $exists=mysqli_query($conn,"SELECT * FROM ratings WHERE id_user=$user AND id_jawaban=$id");
         $this->validate($request, [
             'rating'=>'required',
-            'id_user'=>'required',
         ]);
 
         $jawaban = Jawaban::find($id);
         
-        $exist=Rating::where([
-            ['id_user', '=', Auth::user()->id],
-            ['id_jawaban', '=', $jawaban->id_jawaban],
-        ]);
-
-        if($exist){
+        // $exist=Rating::where('id_user', '=', Auth::user()->id)->where('id_jawaban', '=', $jawaban->id_jawaban); 
+        if(mysqli_num_rows($exists)>100){
             return redirect()->route('pertanyaan.show', [$jawaban->id_pertanyaan])->with('message', 'Rating invalid');
         } else {
-            Jawaban::create([
+            Rating::create([
                 'id_user'=>Auth::user()->id,
-                'id_jawaban'=>$request->get('id_jawaban'),
+                'id_jawaban'=>$id,
                 'rating'=>$request->get('rating'),
             ]);
-        $jumlah=Rating::where('id_jawaban','=',$id);
+        $jumlah=mysqli_query($conn,"SELECT rating FROM ratings WHERE id_jawaban= $id");
         $j=Rating::where('id_jawaban','=',$id)->count();
         $rate=0;
         foreach($jumlah as $jum){
-            $rate=$rate+$jum->rating;
+            $rate=$rate+$jum['rating'];
+        }
+        if($j==0){
+            $jawaban->rating=$request->get('rating');
+            $jawaban->save();
+        }else{
+        $jawaban->rating=round($rate/$j,2);
+        $jawaban->save();
         }
         
-        $jawaban->rating=$rate/$j;
-        $jawaban->save();
+        $finalrate=Jawaban::where('id_user','=',$jawaban->user->id)->sum('rating');
+        $jawaban->user->rating=$finalrate;
+        $jawaban->user->save();
+
+        
+        $pertanyaan=Pertanyaan::find($jawaban->id_pertanyaan);
+        if($pertanyaan->status=="dijawab"){
+            if(round($rate/$j,2) && $j>=2){
+            $pertanyaan->status="terjawab";
+            $pertanyaan->save();
+            }
+        }
 
         return redirect()->route('pertanyaan.show', [$jawaban->id_pertanyaan])->with('message', 'Rating berhasil direkam');
         }
@@ -114,5 +130,11 @@ class RatingController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function ratingcount($id)
+    {
+        $usercount=Rating::where('id_jawaban','=',$id)->count();
+        echo $usercount;
     }
 }

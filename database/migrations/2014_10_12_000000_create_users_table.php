@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->integer('rating');
+            $table->decimal('rating',2,1);
             $table->string('password');
             $table->string('foto')->unsinged()->nullable();
             $table->enum('pangkat', ['awam','otakers','admin']);

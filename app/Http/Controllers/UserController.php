@@ -75,6 +75,11 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('message','user baru berhasil dibuat');
     }
 
+    public function show()
+    {
+
+    }
+
     public function edit($id){
         if(Auth::user()->pangkat=="admin" || (Auth::check() && Auth::user()->id==$id)){
             $users = User::find($id);

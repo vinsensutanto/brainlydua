@@ -107,16 +107,7 @@ class PertanyaanController extends Controller
             else{
                 $namafoto =$pertanyaan->foto;
             }
-    
-            Pertanyaan::create([
-                'id_user'=>$user,
-                'pertanyaan'=>$request->get('pertanyaan'),
-                'status'=>$request->get('status'),
-                'id_kategori'=>$request->get('id_kategori'),
-                'id_kelas'=>$request->get('id_kelas'),
-                'foto'=>$namafoto,
-                ]);
-
+            
             $pertanyaan->id_user=$user;
             $pertanyaan->pertanyaan=$request->get('pertanyaan');
             $pertanyaan->status=$request->get('status');

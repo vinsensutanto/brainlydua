@@ -68,6 +68,13 @@ class JawabanController extends Controller
             'foto'=>$namafoto,
             'rating'=>0,
         ]);
+
+        
+        $pertanyaan=Pertanyaan::find($request->get('id_pertanyaan'));
+        if($pertanyaan->status=="menunggu"){
+            $pertanyaan->status="dijawab";
+            $pertanyaan->save();
+        }
         
         return redirect()->route('pertanyaan.show', [$request->get('id_pertanyaan')])->with('message', 'Pertanyaan berhasil dijawab');
     }
@@ -116,24 +123,5 @@ class JawabanController extends Controller
     public function destroy($id)
     {
         //
-    }
-    
-    public function rating(Request $request, $id)
-    {
-        $this->validate($request, [
-            'rating'=>'required',
-        ]);
-        $jawaban = Jawaban::find($id);
-        $rateawal=$request->get('rating');
-        $ratedb=$jawaban->rating;
-        if($ratedb==0){
-            $rateakhir=$rateawal;
-        }else{
-            $rateakhir=($jawaban->rating+$rateawal)/2;
-        }
-        $jawaban->rating=$rateakhir;
-        $jawaban->save();
-
-        return redirect()->route('pertanyaan.show', [$jawaban->id_pertanyaan])->with('message', 'Rating berhasil dijawab');
     }
 }

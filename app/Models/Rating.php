@@ -22,4 +22,10 @@ class Rating extends Model
     public function jawaban() {
         return $this->belongsTo(Jawaban::class);
     }
+    
+    public static function ratingcount($id)
+    {
+        $usercount=Rating::where('id_jawaban','=',$id)->count();
+        echo $usercount;
+    }
 }
