@@ -77,10 +77,15 @@ class RatingController extends Controller
         
         $pertanyaan=Pertanyaan::find($jawaban->id_pertanyaan);
         if($pertanyaan->status=="dijawab"){
-            if(round($rate/$j,2) && $j>=2){
+            if(round($rate/$j,2)>=4 && $j>=2){
             $pertanyaan->status="terjawab";
             $pertanyaan->save();
             }
+        }elseif($pertanyaan->status=="terjawab"){
+            if(round($rate/$j,2)<4 || $j<2){
+                $pertanyaan->status="dijawab";
+                $pertanyaan->save();
+                }
         }
 
         return redirect()->route('pertanyaan.show', [$jawaban->id_pertanyaan])->with('message', 'Rating berhasil direkam');

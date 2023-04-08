@@ -158,6 +158,21 @@
                                                 <input type="radio" name="rating" value="5">5  &nbsp
                                                 <button type="submit">Beri Rating!</button>
                                             </form>
+                                            <form action="../komen/{{$jawab->id_jawaban}}" method="post" enctype="multipart/form-data">
+                                            @csrf
+                                            <div>
+                                                <input type="text" name="komen" placeholder="berikan komentar!" style="width:40%"/>
+                                                <button type="submit">Komen!</button>
+                                            </div>
+                                            </form>
+                                            @endif
+                                            {{-- //komen --}}
+                                            {{$komentar=App\Models\Komen::where('id_jawaban','=', $jawab->id_jawaban)->orderBy('created_at', 'desc')->count()}} Komentar
+                                            @if($komentar > 0)
+                                                <?php $komentars=App\Models\Komen::where('id_jawaban','=', $jawab->id_jawaban)->orderBy('created_at', 'desc')->get(); ?>
+                                                @foreach($komentars as $komen)
+                                                    <div class="pertanyaan" style="background-color:rgba(0, 0, 0, 0.15);">{{$komen->user->username}} | {{$komen->created_at}} : {{$komen->komen}}</div>
+                                                @endforeach
                                             @endif
                                         </span>
                                         </div>
@@ -176,12 +191,18 @@
                                                 <button class="btn btn-primary">Jawab Soal ini</button>
                                             </a>
                                         </div>
+                                    @elseif($pertanyaans->status=='dijawab')
+                                        <div class="form-group"><br>
+                                            <a href="{{route('jawaban.show',[$jawabans->id_pertanyaan])}}">
+                                                <button class="btn btn-primary">Berikan Jawaban yang lebih baik</button>
+                                            </a>
+                                        </div>
                                     @elseif(!empty($jawabans->jawaban))
-                                    <?php 
-                                    $highest=App\Models\Jawaban::where('id_pertanyaan','=', $pertanyaans->id_pertanyaan)->orderBy('rating', 'desc')->first();
-                                    $count=App\Models\Rating::where('id_jawaban','=',$highest->id_jawaban)->count();
-                                    $total=App\Models\Rating::where('id_jawaban','=',$highest->id_jawaban)->where('id_user','=',$highest->id_user)->sum('rating');
-                                    ?>
+                                        <?php 
+                                        $highest=App\Models\Jawaban::where('id_pertanyaan','=', $pertanyaans->id_pertanyaan)->orderBy('rating', 'desc')->first();
+                                        $count=App\Models\Rating::where('id_jawaban','=',$highest->id_jawaban)->count();
+                                        $total=App\Models\Rating::where('id_jawaban','=',$highest->id_jawaban)->where('id_user','=',$highest->id_user)->sum('rating');
+                                        ?>
                                         @if($count<=0)
                                         <div class="form-group"><br>
                                             <a href="{{route('jawaban.show',[$jawabans->id_pertanyaan])}}">

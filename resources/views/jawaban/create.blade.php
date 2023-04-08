@@ -131,7 +131,7 @@
             <input type="hidden" value="{{$pertanyaan->id_user}}" name="id_user" required> {{--ini nanti diganti --}}
             <input type="hidden" value="0" name="rating"required>
                 <div class="card-body">
-                    <div class="form-group"> {{$pertanyaan->pertanyaan}}</div>
+                    <div class="form-group"> <?php echo $pertanyaan->pertanyaan ?></div>
                   </div>
                 
                   <div class="form-group">

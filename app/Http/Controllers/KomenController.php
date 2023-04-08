@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Komen;
+use App\Models\Jawaban;
 
 use Illuminate\Http\Request;
 
@@ -28,19 +29,21 @@ class KomenController extends Controller
     * @param \Illuminate\Http\Request $request
     * @return \Illuminate\Http\Response
     */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         $this->validate($request,[
-        'komen'=>['required','unique:komen,komen', 'max:30'],
+        'komen'=>['required','unique:komens,komen', 'max:30'],
         ]);
+        $jawaban = Jawaban::find($id);
 
         Komen::create([
             'komen'=>$request->get('komen'),
-            'id_pertanyaan'=>$request->get('id_pertanyaan'),
-            'id_jawaban'=>$request->get('id_jawaban'),
+            'id_pertanyaan'=>NULL,
+            'id_jawaban'=>$id,
+            'id_user'=>Auth::user()->id,
             ]);
-
-        return redirect()->route('komen.index')->with('message','komen baru berhasil dibuat');
+            
+        return redirect()->route('pertanyaan.show', [$$jawaban->id_pertanyaan])->with('message', 'Komentar berhasil dibuat');
         
     }
 
