@@ -12,7 +12,7 @@ class Jawaban extends Model
     protected $guarded = [];
     
     public function pertanyaan(){
-        return $this->belongsTo(Pertanyaan::class);
+        return $this->belongsTo(Pertanyaan::class,'id_pertanyaan','id_pertanyaan');
     }
     
     public function user(){

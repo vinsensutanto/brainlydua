@@ -16,11 +16,11 @@ class Rating extends Model
     }
     
     public function pertanyaan() {
-        return $this->belongsTo(Pertanyaan::class);
+        return $this->belongsTo(Pertanyaan::class,'id_pertanyaan','id_pertanyaan');
     }
     
     public function jawaban() {
-        return $this->belongsTo(Jawaban::class);
+        return $this->belongsTo(Jawaban::class,'id_jawaban','id_jawaban');
     }
     
     public static function ratingcount($id)

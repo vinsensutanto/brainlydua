@@ -16,7 +16,10 @@ class JawabanController extends Controller
      */
     public function index()
     {
-        //
+        if(Auth::user()->pangkat=="admin"){
+    $jawabans = Jawaban::get();
+    return view('jawaban.index', compact('jawabans'));
+        }
     }
 
     /**
@@ -122,6 +125,11 @@ class JawabanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Auth::user()->pangkat=="admin"){
+    $jawaban = Jawaban::find($id);
+    $jawaban->delete();
+
+    return redirect()->route('jawaban.index')->with('message','Laporan berhasil dihapus');
+        }
     }
 }

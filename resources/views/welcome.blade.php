@@ -105,6 +105,14 @@
                 </div>
             <a href="" data-bs-toggle="modal" data-bs-target="#searchModal" class="btn btn-primary py-2 px-4 ms-3">Cari Pertanyaan yang sudah terjawab!</a>
         </div>
+        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();" class="nav-link">
+                <i class="nav-icon far fa-circle text-danger"></i>
+                <p>{{ __('Logout') }}</p>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+              </a>
     </nav>
     <!-- Navbar End -->
 
