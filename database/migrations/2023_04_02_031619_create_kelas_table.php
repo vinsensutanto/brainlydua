@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateKelasTable extends Migration
 {
@@ -18,6 +19,47 @@ class CreateKelasTable extends Migration
             $table->integer('kelas')->unique();
             $table->timestamps();
         });
+
+        DB::table('kelas')->insert(
+            array(
+                [
+                    'kelas' => '1',
+                ],
+                [
+                    'kelas' => '2',
+                ],
+                [
+                    'kelas' => '3',
+                ],
+                [
+                    'kelas' => '4',
+                ],
+                [
+                    'kelas' => '5',
+                ],
+                [
+                    'kelas' => '6',
+                ],
+                [
+                    'kelas' => '7',
+                ],
+                [
+                    'kelas' => '8',
+                ],
+                [
+                    'kelas' => '9',
+                ],
+                [
+                    'kelas' => '10',
+                ],
+                [
+                    'kelas' => '11',
+                ],
+                [
+                    'kelas' => '12',
+                ],
+            )
+        );
     }
 
     /**

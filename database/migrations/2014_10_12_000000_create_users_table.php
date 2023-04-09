@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class CreateUsersTable extends Migration
 {
@@ -25,6 +27,19 @@ class CreateUsersTable extends Migration
             $table->timestamp('username_verified_at')->nullable();
             $table->timestamps();
         });
+
+        
+        DB::table('users')->insert(
+            array(
+                [
+                    'username' => 'admin',
+                    'email' => 'admin@gmail.com',
+                    'rating' => 0,
+                    'password' => Hash::make('admin'),
+                    'pangkat' => 'admin',
+                ],
+            )
+        );
     }
 
     /**
