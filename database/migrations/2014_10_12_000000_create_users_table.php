@@ -32,6 +32,13 @@ class CreateUsersTable extends Migration
         DB::table('users')->insert(
             array(
                 [
+                    'username' => 'anonim',
+                    'email' => 'anonim@gmail.com',
+                    'rating' => 0,
+                    'password' => Hash::make('anonim'),
+                    'pangkat' => 'awam',
+                ],
+                [
                     'username' => 'admin',
                     'email' => 'admin@gmail.com',
                     'rating' => 0,
