@@ -102,10 +102,10 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
                 <a href="/" class="nav-item nav-link active">Home</a>
-                </div>
+            </div>
             <a href="" data-bs-toggle="modal" data-bs-target="#searchModal" class="btn btn-primary py-2 px-4 ms-3">Cari Pertanyaan yang sudah terjawab!</a>
-        </div>
-        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+        
+        <a class="navbar-nav ms-auto py-0" href="{{ route('logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();" class="nav-link">
                 <i class="nav-icon far fa-circle text-danger"></i>
                 <p>{{ __('Logout') }}</p>
@@ -113,6 +113,7 @@
                     @csrf
                 </form>
               </a>
+        </div>
     </nav>
     <!-- Navbar End -->
 

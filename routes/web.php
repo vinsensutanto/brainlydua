@@ -52,7 +52,7 @@ Route::resource('jawaban', 'JawabanController');
 Route::post('/cari', 'PertanyaanController@cari');
 Route::post('/rating/{rating}','RatingController@store');
 Route::post('/komen/{id}','KomenController@store');
-Route::get('/profile/{id}', 'UserController@profile');
+Route::get('/profile', 'UserController@profile');
 
 // Route::match(['get', 'post'], 'register', function(){
 //     return redirect('/');
