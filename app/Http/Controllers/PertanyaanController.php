@@ -72,7 +72,7 @@ class PertanyaanController extends Controller
             'kode'=>$kode,
             ]);
             
-        return redirect()->route('pertanyaan.show', [$kode])->with('message','Laporan baru berhasil dibuat dengan kode: ');
+        return redirect()->route('pertanyaan.show', [$kode])->with('message','Laporan baru berhasil dibuat');
     }
 
     public function edit($id_user){

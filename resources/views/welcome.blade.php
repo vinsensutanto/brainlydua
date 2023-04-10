@@ -84,8 +84,8 @@
         <h1>Selamat Datang di Otak-otak!</h1>
         <h2>Kami <span class="typed" data-typed-items="Menampung pertanyaan kalian, Mencoba menjawab, Membuka tempat diskusi"></span></h2>
         <div class="actions">
-          <a href="#cari" class="btn-get-started">Mulai Bertanya Sekarang</a>
-          <a href="/tentang" class="btn-services">Coba Jawab Pertanyaan</a>
+          <a href="#tanya" class="btn-get-started">Mulai Bertanya Sekarang</a>
+          <a href="#jawab" class="btn-services">Coba Jawab Pertanyaan</a>
         </div>
       </div>
     </div>
@@ -139,9 +139,9 @@
         <!-- Full Screen Search End -->
 
     <!-- Banner Start -->
-    <div class="container-fluid">
+    <div class="container-fluid" id="jawab">
         <div class="container">
-            <div class="row gx-0"  id="cari">
+            <div class="row gx-0">
                 
                 @if(Session::has('message'))
                 <div class="alert alert-success">
@@ -273,7 +273,7 @@
                         @endif
                 </div>
                 <div class="col-lg-6">
-                    <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
+                    <div id="tanya" class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
                         <h1 class="text-white mb-4">Ajukan Pertanyaan Sekarang!</h1>
                         <form action="{{ route('pertanyaan.store') }}" method="post" enctype="multipart/form-data">
                             @csrf

@@ -21,7 +21,7 @@
         </div>
         <div class="info">
           @if(Auth::user())
-            <a href="{{ url('/profile') }}/{{Auth::user()->id}}" class="d-block">{{{ isset(Auth::user()->username) ? Auth::user()->username : Auth::user()->username }}}</a>
+            <a href="{{ url('/profile') }}" class="d-block">{{{ isset(Auth::user()->username) ? Auth::user()->username : Auth::user()->username }}}</a>
           @endif
         </div>
       </div>
