@@ -215,8 +215,8 @@
                                     @endif
                                 </div>
                                 </a>
-                                {{$pertanyaans->links()}}
                             @endforeach
+                                {{$pertanyaans->links()}}
                                 
                                 {{-- <table style="border:none;color:white;">
                                     <tr>
