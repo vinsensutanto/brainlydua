@@ -88,7 +88,7 @@ class RatingController extends Controller
                 }
         }
 
-        return redirect()->route('pertanyaan.show', [$jawaban->id_pertanyaan])->with('message', 'Rating berhasil direkam');
+        return redirect()->route('pertanyaan.show', [$jawaban->kode])->with('message', 'Rating berhasil direkam');
         }
     }
 
