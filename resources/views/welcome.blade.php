@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Website ingin Tahu</title>
+    <title>ingin Tahu | Tanyakan Pertanyaan Anda!</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -69,6 +69,10 @@
         font-size:1vw;
         float:right;
     }
+    .qwerty:hover{
+        background: #091E3E !important;
+    }
+    
   </style>
 </head>
 
@@ -81,7 +85,7 @@
           <!-- <img class="" src="{{asset('frontend/assets/img/logo.png')}}" alt="Imperial"> -->
         </div>
 
-        <h1>"Temukan Jawaban yang Anda Butuhkan dengan Cepat dan Mudah dengan Aplikasi Ingin Tahu!"</h1>
+        <h1>Selamat Datang di ingin Tahu!</h1>
         <h2>Kami <span class="typed" data-typed-items="Menampung pertanyaan kalian, Mencoba menjawab, Membuka tempat diskusi"></span></h2>
         <div class="actions">
           <a href="#tanya" class="btn-get-started">Mulai Bertanya Sekarang</a>
@@ -94,7 +98,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="{{ route('login') }}" class="navbar-brand p-0">
-            <h1 class="m-0 text-primary"><img style="width:15%" src="{{asset('frontend/img/logo.jpg')}}">&nbsp;ingin Tahu</h1>
+            <h1 class="m-0 text-primary"><img style="width:8%" src="{{asset('frontend/img/logo.png')}}">&nbsp;ingin Tahu</h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -103,7 +107,7 @@
             <div class="navbar-nav ms-auto py-0">
                 <a href="/" class="nav-item nav-link active">Home</a>
             </div>
-            <a href="" data-bs-toggle="modal" data-bs-target="#searchModal" class="btn btn-primary py-2 px-4 ms-3">Cari Pertanyaan yang sudah terjawab!</a>
+            <a href="" data-bs-toggle="modal" data-bs-target="#searchModal" class="btn btn-primary py-2 px-4 ms-3 qwerty">Cari Pertanyaan yang sudah terjawab!</a>
                 
             @if(Auth::check())
             <div class="navbar-nav ms-auto py-0">
@@ -141,20 +145,20 @@
         <!-- Full Screen Search End -->
 
     <!-- Banner Start -->
-    <div class="container-fluid" id="jawab">
+   <div class="container-fluid" id="jawab">
         <div class="container">
-            <div class="row gx-0">
+            <div class="row gx-0" style = "margin-top: 10px;">
                 
                 @if(Session::has('message'))
                 <div class="alert alert-success">
                     {{Session::get('message')}}</div>
                 @endif
-                <div class="col-lg-4 wow zoomIn" data-wow-delay="0.3s">
-                    <div class="bg-dark d-flex flex-column p-5" style="height: 300px;">
+                <center> <div class="col-lg-8 wow zoomIn" data-wow-delay="0.8s">
+                    <div class="bg-dark d-flex flex-column p-5" style="padding-bottom: 100px;">
                         <h3 class="text-white mb-3">Filter Pertanyaan</h3>
                         <form action="/cari" method="post">
                             @csrf
-                            <table><tr><td>
+                          
                             <div class="date mb-3 form-group">
                                 <select class="custom-select form-control-border" name="kelas" id="kelas">
                                 @if(count($kelass)>0)
@@ -167,7 +171,7 @@
                                 @endif
                                 </select>
                               </div>
-                            </td><td>
+                        
                               <div class="date mb-3 form-group">
                                 <select class="custom-select form-control-border" name="kategori" id="kategori">
                                 @if(count($kategoris)>0)
@@ -180,12 +184,12 @@
                                   @endif
                                 </select>
                               </div>
-                            </td></tr><tr><td colspan="2">
+                
                         <div class="date mb-3" id="date" data-target-input="nearest">
                             <input type="text" class="form-control bg-light border-0 datetimepicker-input"
                             name="cari" placeholder="Cari pertanyaan" value="{{ old('cari') }}"style="height: 40px;">
                         </div>
-                    </td></tr><tr><td>
+                 
                         <div class=" date mb-3 form-group">
                             <select class="custom-select form-control-border" name="status" id="status">
                             <option disabled selected>Semua Status</option>
@@ -194,15 +198,17 @@
                               <option value="terjawab">Terjawab</option>
                             </select>
                           </div>
-                        </td><td>
+        
                         <input type="submit" class="btn btn-light">
-                        </td></tr></table>
-                        </form>
+                      </table>
+                        </form></center>
                     </div>
                 </div>
-                <div class="col-lg-8 wow zoomIn" data-wow-delay="0.6s">
-                    <div class="bg-secondary d-flex flex-column p-5">
-                        <h3 class="text-white">List Pertanyaan</h3>
+                <div>
+                <div>
+               <center> <div class="col-lg-8 wow zoomIn" data-wow-delay="0.6s">
+                    <div class="bg-dark d-flex flex-column p-5"  style = "background: rgba(8, 178, 218, .8)!important;">
+                        <h3 class="text-white" >List Pertanyaan</h3>
                             @foreach($pertanyaans as $pertanyaan)
                                 <a href="{{route('pertanyaan.show', [$pertanyaan->kode])}}" style="cursor: default; color: black; text-decoration:none;">
                                 <div class="row pertanyaan" style="background-color:white">
@@ -215,8 +221,8 @@
                                     @endif
                                 </div>
                                 </a>
-                            @endforeach
                                 {{$pertanyaans->links()}}
+                            @endforeach
                                 
                                 {{-- <table style="border:none;color:white;">
                                     <tr>
@@ -250,7 +256,7 @@
                                                     <i>waktu</i> -> <b>feedback</b><br/>
                                         </b></td>
                                     </tr>
-                                </table> --}}
+                                </table> --}}</center>
 
                             </div>
                     </div>
@@ -267,8 +273,7 @@
             <div class="row gx-5">
                 <div class="col-lg-6 py-5">
                     <div class="py-5">
-                        <h1 class="display-5 text-white mb-4">Kolaborasi dalam Pelaporan, Wujudkan Transparansi dan Akuntabilitas yang Lebih Baik!</h1>
-                        <p class="text-white mb-0">Perlu diingat, setiap pelaporan yang kalian buat akan mendapatkan kode unik yang berbeda-beda. Kode unik ini nantinya akan beguna di saat kalian mengecek status dan tanggapan dari pelaporan.</p>
+                        <h1 class="display-5 text-white mb-4">Temukan Jawaban yang Anda Butuhkan dengan Cepat dan Mudah dengan Aplikasi ingin Tahu!</h1>
                     </div>
                         @if(Session::has('message'))
                         <div class="alert alert-success">
@@ -278,7 +283,7 @@
                 <div class="col-lg-6">
                     <div id="tanya" class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
                         <h1 class="text-white mb-4">Ajukan Pertanyaan Sekarang!</h1>
-                        <form action="{{ route('pertanyaan.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('pertanyaan.store') }}" method="post" enctype="multipart/form-data" style = "color: black!important;">
                             @csrf
                             <div class="row g-3">
                                 <div class="">
@@ -382,10 +387,9 @@
         <div class="container">
             <div class="row g-0">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="#">Pengaduan Sekolah</a>. All Rights Reserved.</p>
+                    <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="#">ingin Tahu</a>. All Rights Reserved.</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <p class="mb-0">Designed by <a class="text-white border-bottom" href="https://htmlcodex.com">HTML Codex</a></p>
                 </div>
             </div>
         </div>

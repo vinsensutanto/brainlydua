@@ -116,7 +116,7 @@ h6 {
 }
 
 #hero .hero-container {
-  background: rgba(0, 0, 0, 0.8);
+
   display: table-cell;
   margin: 0;
   padding: 0;
@@ -1037,7 +1037,7 @@ section {
 .breadcrumbs ol li+li::before {
   display: inline-block;
   padding-right: 10px;
-  color: gray;
+  color: black;
   content: "/";
 }
 
