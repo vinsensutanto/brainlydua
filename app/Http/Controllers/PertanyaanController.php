@@ -135,7 +135,7 @@ class PertanyaanController extends Controller
 
     public function show($id)
     {
-        $pertanyaans = Pertanyaan::where('kode','=',$id)->orWhere('id_pertanyaan','=',$id)->first();
+        $pertanyaans = Pertanyaan::where('kode','=',$id)->first();
         $id_pertanyaans = $pertanyaans->id_pertanyaan;
         $jawaban=Jawaban::all()->where('id_pertanyaan','=', $id_pertanyaans);
         $jawabans=Jawaban::orderBy('created_at','DESC')->where('id_pertanyaan','=', $id_pertanyaans)->first();
