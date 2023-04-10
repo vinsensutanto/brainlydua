@@ -98,7 +98,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="{{ route('login') }}" class="navbar-brand p-0">
-            <h1 class="m-0 text-primary"><img style="width:8%" src="{{asset('frontend/img/logo.png')}}">&nbsp;ingin Tahu</h1>
+            <h1 class="m-0 text-primary"><img style="width:15%" src="{{asset('frontend/img/logo.jpg')}}">&nbsp;ingin Tahu</h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
