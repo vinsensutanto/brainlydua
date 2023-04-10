@@ -43,7 +43,7 @@ class KomenController extends Controller
             'id_user'=>Auth::user()->id,
             ]);
             
-        return redirect()->route('pertanyaan.show', [$$jawaban->id_pertanyaan])->with('message', 'Komentar berhasil dibuat');
+        return redirect()->route('pertanyaan.show', [$jawaban->id_pertanyaan])->with('message', 'Komentar berhasil dibuat');
         
     }
 

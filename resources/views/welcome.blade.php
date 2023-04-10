@@ -104,15 +104,17 @@
                 <a href="/" class="nav-item nav-link active">Home</a>
             </div>
             <a href="" data-bs-toggle="modal" data-bs-target="#searchModal" class="btn btn-primary py-2 px-4 ms-3">Cari Pertanyaan yang sudah terjawab!</a>
-        
-        <a class="navbar-nav ms-auto py-0" href="{{ route('logout') }}" onclick="event.preventDefault();
-                document.getElementById('logout-form').submit();" class="nav-link">
-                <i class="nav-icon far fa-circle text-danger"></i>
-                <p>{{ __('Logout') }}</p>
+                
+            @if(Auth::check())
+            <div class="navbar-nav ms-auto py-0">
+                <a href="{{ route('login') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();" class="nav-item nav-link active">Log Out
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>
-              </a>
+                </a>
+            </div>
+            @endif
         </div>
     </nav>
     <!-- Navbar End -->

@@ -45,7 +45,7 @@ class PertanyaanController extends Controller
         ]);
 
         if(!Auth::user()){
-            $user=0;
+            $user=1;
         }else{
             $user=Auth::user()->id;
         }
