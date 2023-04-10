@@ -37,7 +37,7 @@ Route::post('/list', function (Request $request) {
         $pertanyaans = Pertanyaan::where('pertanyaan', 'LIKE', "%{$id}%")->where('status','=','terjawab')->orWhere('status','=','dijawab')->get();
     return view('welcome',compact('kelass', 'kategoris','pertanyaans'));
     }else{
-        $pertanyaans = Pertanyaan::get()->paginate(7);
+        $pertanyaans = Pertanyaan::get();
         return view('welcome',compact('kelass', 'kategoris','pertanyaans'));
     }
 });
@@ -52,7 +52,7 @@ Route::resource('jawaban', 'JawabanController');
 Route::post('/cari', 'PertanyaanController@cari');
 Route::post('/rating/{rating}','RatingController@store');
 Route::post('/komen/{id}','KomenController@store');
-Route::get('/profile/{id}', 'UserController@profile');
+Route::get('/profile', 'UserController@profile');
 
 // Route::match(['get', 'post'], 'register', function(){
 //     return redirect('/');

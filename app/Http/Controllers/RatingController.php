@@ -48,8 +48,8 @@ class RatingController extends Controller
         $jawaban = Jawaban::find($id);
         
         // $exist=Rating::where('id_user', '=', Auth::user()->id)->where('id_jawaban', '=', $jawaban->id_jawaban); 
-        if(mysqli_num_rows($exists)>100){
-            return redirect()->route('pertanyaan.show', [$jawaban->id_pertanyaan])->with('message', 'Rating invalid');
+        if(mysqli_num_rows($exists)>0){
+            return redirect()->route('pertanyaan.show', [$jawaban->pertanyaan->kode])->with('message', 'Rating invalid');
         } else {
             Rating::create([
                 'id_user'=>Auth::user()->id,
@@ -88,7 +88,7 @@ class RatingController extends Controller
                 }
         }
 
-        return redirect()->route('pertanyaan.show', [$jawaban->id_pertanyaan])->with('message', 'Rating berhasil direkam');
+        return redirect()->route('pertanyaan.show', [$jawaban->pertanyaan->kode])->with('message', 'Rating berhasil direkam');
         }
     }
 

@@ -21,7 +21,7 @@
         </div>
         <div class="info">
           @if(Auth::user())
-            <a href="{{ url('/profile') }}/{{Auth::user()->id}}" class="d-block">{{{ isset(Auth::user()->username) ? Auth::user()->username : Auth::user()->username }}}</a>
+            <a href="{{ url('/profile') }}" class="d-block">{{{ isset(Auth::user()->username) ? Auth::user()->username : Auth::user()->username }}}</a>
           @endif
         </div>
       </div>
@@ -42,21 +42,21 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('pertanyaan.index')}}" class="nav-link"><i class="nav-icon fas fa-th"></i>
+            <a href="{{route('pertanyaan.index')}}" class="nav-link"><i class="nav-icon fas fa-question"></i>
               <p>
                 Pertanyaan
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('user.index')}}" class="nav-link"><i class="nav-icon fas fa-th"></i>
+            <a href="{{route('user.index')}}" class="nav-link"><i class="nav-icon fas fa-user-friends"></i>
               <p>
                 User
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('komen.index')}}" class="nav-link"><i class="nav-icon fas fa-th"></i>
+            <a href="{{route('komen.index')}}" class="nav-link"><i class="nav-icon fas fa-exclamation"></i>
               <p>
                 Komentar
               </p>
@@ -70,7 +70,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('kategori.index')}}" class="nav-link"><i class="nav-icon fas fa-th"></i>
+            <a href="{{route('kategori.index')}}" class="nav-link"><i class="nav-icon fas fa-file-signature"></i>
               <p>
                 Kategori
               </p>

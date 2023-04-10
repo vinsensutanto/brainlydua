@@ -84,8 +84,8 @@
         <h1>"Temukan Jawaban yang Anda Butuhkan dengan Cepat dan Mudah dengan Aplikasi Ingin Tahu!"</h1>
         <h2>Kami <span class="typed" data-typed-items="Menampung pertanyaan kalian, Mencoba menjawab, Membuka tempat diskusi"></span></h2>
         <div class="actions">
-          <a href="#cari" class="btn-get-started">Mulai Bertanya Sekarang</a>
-          <a href="/tentang" class="btn-services">Coba Jawab Pertanyaan</a>
+          <a href="#tanya" class="btn-get-started">Mulai Bertanya Sekarang</a>
+          <a href="#jawab" class="btn-services">Coba Jawab Pertanyaan</a>
         </div>
       </div>
     </div>
@@ -102,17 +102,20 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
                 <a href="/" class="nav-item nav-link active">Home</a>
-                </div>
+            </div>
             <a href="" data-bs-toggle="modal" data-bs-target="#searchModal" class="btn btn-primary py-2 px-4 ms-3">Cari Pertanyaan yang sudah terjawab!</a>
-        </div>
-        <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                document.getElementById('logout-form').submit();" class="nav-link">
-                <i class="nav-icon far fa-circle text-danger"></i>
-                <p>{{ __('Logout') }}</p>
+                
+            @if(Auth::check())
+            <div class="navbar-nav ms-auto py-0">
+                <a href="{{ route('login') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();" class="nav-item nav-link active">Log Out
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>
-              </a>
+                </a>
+            </div>
+            @endif
+        </div>
     </nav>
     <!-- Navbar End -->
 
@@ -138,9 +141,9 @@
         <!-- Full Screen Search End -->
 
     <!-- Banner Start -->
-    <div class="container-fluid">
+    <div class="container-fluid" id="jawab">
         <div class="container">
-            <div class="row gx-0"  id="cari">
+            <div class="row gx-0">
                 
                 @if(Session::has('message'))
                 <div class="alert alert-success">
@@ -201,7 +204,7 @@
                     <div class="bg-secondary d-flex flex-column p-5">
                         <h3 class="text-white">List Pertanyaan</h3>
                             @foreach($pertanyaans as $pertanyaan)
-                                <a href="{{route('pertanyaan.show', [$pertanyaan->id_pertanyaan])}}" style="cursor: default; color: black; text-decoration:none;">
+                                <a href="{{route('pertanyaan.show', [$pertanyaan->kode])}}" style="cursor: default; color: black; text-decoration:none;">
                                 <div class="row pertanyaan" style="background-color:white">
                                     <span><b>{{$pertanyaan->user->username}}</b> - {{$pertanyaan->kategori->kategori}} kelas {{$pertanyaan->kelas->kelas}} - {{$pertanyaan->created_at->diffForHumans()}}</span>
                                     <p style="margin-top:10px;margin-bottom:10px;"><?php echo $pertanyaan['pertanyaan']; ?></p>
@@ -213,6 +216,7 @@
                                 </div>
                                 </a>
                             @endforeach
+                                {{$pertanyaans->links()}}
                                 
                                 {{-- <table style="border:none;color:white;">
                                     <tr>
@@ -272,7 +276,7 @@
                         @endif
                 </div>
                 <div class="col-lg-6">
-                    <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
+                    <div id="tanya" class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
                         <h1 class="text-white mb-4">Ajukan Pertanyaan Sekarang!</h1>
                         <form action="{{ route('pertanyaan.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
@@ -295,7 +299,7 @@
                                     </select>
                                 </div> --}}
                                 <div class="col-12 col-sm-6">
-                                    <select class="form-select bg-light border-0" name="id_kategori" style="height: 55px;">
+                                    <select class="form-select bg-light border-0" name="id_kategori" style="height: 55px;" required>
                                         <option selected disabled><b>Kategori</b></option>
                                         @if(count(App\Models\Kategori::all())>0)
                                             @foreach($kategoris as $kategori)
@@ -304,10 +308,15 @@
                                         @else
                                                 <option disabled selected value="">-- Tidak ada kategori --</option>
                                         @endif
+                                        @error('id_kategori')
+                                            <span class="invalid-feedback" kelas="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </select>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <select class="form-select bg-light border-0" name="id_kelas" style="height: 55px;">
+                                    <select class="form-select bg-light border-0" name="id_kelas" style="height: 55px;" required>
                                         <option selected disabled><b>kelas</b></option>
                                         @if(count(App\Models\Kelas::all())>0)
                                             @foreach($kelass as $kelas)
@@ -316,6 +325,11 @@
                                         @else
                                                 <option disabled selected value="">-- Tidak ada kelas --</option>
                                         @endif
+                                        @error('id_kelas')
+                                            <span class="invalid-feedback" kelas="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </select>
                                 </div>
                                 

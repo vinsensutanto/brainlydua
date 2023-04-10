@@ -21,9 +21,12 @@ class UserController extends Controller
         }
     }
 
-    public function profile($id){
-        $users = User::find($id);
-        return view('otakers.profile',compact('users'));
+    public function profile(){
+        if(Auth::user()){
+            $id=Auth::user()->id;
+            $users = User::find($id);
+            return view('otakers.profile',compact('users'));
+        }
     }
 
     public function create()

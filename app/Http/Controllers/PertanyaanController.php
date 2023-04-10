@@ -40,12 +40,14 @@ class PertanyaanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
+        'id_kategori'=>'required',
+        'id_kelas'=>'required',
         'pertanyaan'=>['max:1000'],
         'foto'=>['mimes:jpeg,png,jpg'],
         ]);
 
         if(!Auth::user()){
-            $user=0;
+            $user=1;
         }else{
             $user=Auth::user()->id;
         }
@@ -72,7 +74,7 @@ class PertanyaanController extends Controller
             'kode'=>$kode,
             ]);
             
-        return redirect()->route('pertanyaan.show', [$kode])->with('message','Laporan baru berhasil dibuat dengan kode: ');
+        return redirect()->route('pertanyaan.show', [$kode])->with('message','Laporan baru berhasil dibuat');
     }
 
     public function edit($id_user){
@@ -133,7 +135,7 @@ class PertanyaanController extends Controller
 
     public function show($id)
     {
-        $pertanyaans = Pertanyaan::where('kode','=',$id)->orWhere('id_pertanyaan','=',$id)->first();
+        $pertanyaans = Pertanyaan::where('kode','=',$id)->first();
         $id_pertanyaans = $pertanyaans->id_pertanyaan;
         $jawaban=Jawaban::all()->where('id_pertanyaan','=', $id_pertanyaans);
         $jawabans=Jawaban::orderBy('created_at','DESC')->where('id_pertanyaan','=', $id_pertanyaans)->first();

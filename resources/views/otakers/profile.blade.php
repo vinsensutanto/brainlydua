@@ -1,6 +1,164 @@
 @extends('admin.navbar') 
-@extends('admin.sidebar') 
+@if(Auth::user())
+  @if(Auth::user()->pangkat=="admin")
+      {{-- @extends('admin.sidebar')  --}}
+      <!-- Main Sidebar Container -->
+      <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="{{url('/home')}}" class="brand-link">
+          <img src="{{asset('backend/dist/img/logo-siganteng.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+          <span class="brand-text font-weight-light">{{ config('app.name', 'Otak-otak') }}</span>
+        </a>
 
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              @if(Auth::user())
+                @if(Auth::user()->foto!=0)
+                <img src="{{asset('fotouser')}}/{{Auth::user()->foto}}" class="img-circle elevation-2" alt="">
+                @endif
+              @else
+                <img src="{{asset('backend/dist/img/logo-siganteng.png')}}" class="img-circle elevation-2" alt="User Image">
+              @endif
+            </div>
+            <div class="info">
+              @if(Auth::user())
+                <a href="{{ url('/profile') }}" class="d-block">{{{ isset(Auth::user()->username) ? Auth::user()->username : Auth::user()->username }}}</a>
+              @endif
+            </div>
+          </div>
+
+          
+
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <!-- Add icons to the links using the .nav-icon class
+                  with font-awesome or any other icon font library -->
+              <li class="nav-item">
+                <a href="{{ url('/home') }}" class="nav-link active">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>
+                    Dashboard
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('pertanyaan.index')}}" class="nav-link"><i class="nav-icon fas fa-question"></i>
+                  <p>
+                    Pertanyaan
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('user.index')}}" class="nav-link"><i class="nav-icon fas fa-user-friends"></i>
+                  <p>
+                    User
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('komen.index')}}" class="nav-link"><i class="nav-icon fas fa-exclamation"></i>
+                  <p>
+                    Komentar
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('kelas.index')}}" class="nav-link"><i class="nav-icon fas fa-th"></i>
+                  <p>
+                    Kelas
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('kategori.index')}}" class="nav-link"><i class="nav-icon fas fa-file-signature"></i>
+                  <p>
+                    Kategori
+                  </p>
+                </a>
+              </li>
+              
+              <li class="nav-header">Lainnya</li>
+              <li class="nav-item">
+                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();" class="nav-link">
+                    <i class="nav-icon far fa-circle text-danger"></i>
+                    <p>{{ __('Logout') }}</p>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                  </a>
+                </li>
+          </nav>
+          <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+      </aside>
+  @else
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="{{url('/home')}}" class="brand-link">
+        <img src="{{asset('backend/dist/img/logo-siganteng.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">{{ config('app.name', 'Otak-otak') }}</span>
+      </a>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            @if(Auth::user())
+              @if(Auth::user()->foto!=0)
+              <img src="{{asset('fotouser')}}/{{Auth::user()->foto}}" class="img-circle elevation-2" alt="">
+              @endif
+            @else
+              <img src="{{asset('backend/dist/img/logo-siganteng.png')}}" class="img-circle elevation-2" alt="User Image">
+            @endif
+          </div>
+          <div class="info">
+            @if(Auth::user())
+              <a href="{{ url('/profile') }}" class="d-block">{{{ isset(Auth::user()->username) ? Auth::user()->username : Auth::user()->username }}}</a>
+            @endif
+          </div>
+        </div>
+
+        
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+            <li class="nav-item">
+              <a href="{{ url('/') }}" class="nav-link active">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Kembali
+                </p>
+              </a>
+            </li>            
+            <li class="nav-header">Lainnya</li>
+            <li class="nav-item">
+              <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                  document.getElementById('logout-form').submit();" class="nav-link">
+                  <i class="nav-icon far fa-circle text-danger"></i>
+                  <p>{{ __('Logout') }}</p>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                      @csrf
+                  </form>
+                </a>
+              </li>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+  @endif
+@endif
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -49,63 +207,22 @@
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-
-            <!-- About Me Box -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">About Me</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <strong><i class="fas fa-book mr-1"></i> Education</strong>
-
-                <p class="text-muted">
-                  B.S. in Computer Science from the University of Tennessee at Knoxville
-                </p>
-
-                <hr>
-
-                <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-
-                <p class="text-muted">Malibu, California</p>
-
-                <hr>
-
-                <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-
-                <p class="text-muted">
-                  <span class="tag tag-danger">UI Design</span>
-                  <span class="tag tag-success">Coding</span>
-                  <span class="tag tag-info">Javascript</span>
-                  <span class="tag tag-warning">PHP</span>
-                  <span class="tag tag-primary">Node.js</span>
-                </p>
-
-                <hr>
-
-                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
           </div>
           <!-- /.col -->
+
           <div class="col-md-9">
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#question" data-toggle="tab">Question</a></li>
                   <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Answer</a></li>
                   <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content">
-                  <div class="active tab-pane" id="activity">
-                  <h3>Pertanyaan</h3>
-                  @foreach(App\Models\Pertanyaan::where('id_user', $users->id)->get() as $pertanyaan)
+                  <div class="active tab-pane" id="question">
+                  @foreach(App\Models\Pertanyaan::where('id_user', $users->id)->latest()->get()->slice(0, 5) as $pertanyaan)
                     <!-- Post -->
                     <div class="post">
                       <div class="user-block">
@@ -120,64 +237,15 @@
                       <p>
                         <?php echo $pertanyaan['pertanyaan']; ?>
                       </p>
-
-                      <p>
-                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
-                        <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i> Like</a>
-                        <span class="float-right">
-                          <a href="#" class="link-black text-sm">
-                            <i class="far fa-comments mr-1"></i> Comments (5)
-                          </a>
-                        </span>
-                      </p>
-
-                      <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
                     </div>
                     <!-- /.post -->
-                  @endforeach
-
-                  <h3>Jawaban</h3>
-                  @foreach(App\Models\Jawaban::where('id_user', $users->id)->get() as $jawaban)
-                    @foreach(App\Models\Pertanyaan::where('id_pertanyaan', $jawaban->id_pertanyaan)->get() as $jawab)
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="{{asset('fotouser')}}/{{$pertanyaan->user->foto}}" alt="user image">
-                        <span class="username">
-                          <a href="#">{{$jawab->user->username}}</a>
-                          <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
-                        </span>
-                        <span class="description">{{$jawab->kategori->kategori}} kelas {{$jawab->kelas->kelas}} - {{$jawab->created_at->diffForHumans()}}</span>
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                        <?php echo $jawab['pertanyaan']; ?>
-                      </p>
-                      <p>Jawab :
-                        <b>{{$jawaban->jawaban}}</b> - Rating : <b>{{$jawaban->rating}}</b>
-                      </p>
-
-                      <p>
-                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
-                        <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i> Like</a>
-                        <span class="float-right">
-                          <a href="#" class="link-black text-sm">
-                            <i class="far fa-comments mr-1"></i> Comments (5)
-                          </a>
-                        </span>
-                      </p>
-
-                      <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
-                    </div>
-                    <!-- /.post -->
-                    @endforeach
                   @endforeach
                   </div>
                   <!-- /.tab-pane -->
                   
                   <div class="tab-pane" id="timeline">
-                    @foreach(App\Models\Jawaban::where('id_user', $users->id)->get() as $jawaban)
-                      @foreach(App\Models\Pertanyaan::where('id_pertanyaan', $jawaban->id_pertanyaan)->get() as $jawab)
+                    @foreach(App\Models\Jawaban::where('id_user', $users->id)->latest()->get()->slice(0, 5) as $jawaban)
+                      @foreach(App\Models\Pertanyaan::where('id_pertanyaan', $jawaban->id_pertanyaan)->latest()->get()->slice(0, 5) as $jawab)
                     <!-- The timeline -->
                     <div class="timeline timeline-inverse">
                       <!-- timeline time label -->
@@ -200,7 +268,7 @@
                             <?php echo $jawab['pertanyaan']; ?>
                           </div>
                           <div class="timeline-footer">
-                            <a href="{{route('pertanyaan.show', [$jawab->id_pertanyaan])}}" class="btn btn-primary btn-sm">Read more</a>
+                            <a href="{{route('pertanyaan.show', [$pertanyaan->kode])}}" class="btn btn-primary btn-sm">Read more</a>
                           </div>
                         </div>
                       </div>
@@ -215,10 +283,10 @@
                           <h3 class="timeline-header"><a href="#">Anda</a> menjawab - Rating : {{$jawaban->rating}}</h3>
 
                           <div class="timeline-body">
-                            {{$jawaban->jawaban}}
+                          <?php echo $jawaban['jawaban']; ?>
                           </div>
                           <div class="timeline-footer">
-                            <a href="#" class="btn btn-warning btn-flat btn-sm">View comment</a>
+                            <a href="{{route('pertanyaan.show', [$jawaban->pertanyaan->kode])}}" class="btn btn-warning btn-flat btn-sm">View comment</a>
                           </div>
                         </div>
                       </div>
