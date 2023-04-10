@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Otak-otak | Website mirip Brainly</title>
+    <title>Website ingin Tahu</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -81,7 +81,7 @@
           <!-- <img class="" src="{{asset('frontend/assets/img/logo.png')}}" alt="Imperial"> -->
         </div>
 
-        <h1>Selamat Datang di Otak-otak!</h1>
+        <h1>"Temukan Jawaban yang Anda Butuhkan dengan Cepat dan Mudah dengan Aplikasi Ingin Tahu!"</h1>
         <h2>Kami <span class="typed" data-typed-items="Menampung pertanyaan kalian, Mencoba menjawab, Membuka tempat diskusi"></span></h2>
         <div class="actions">
           <a href="#cari" class="btn-get-started">Mulai Bertanya Sekarang</a>
@@ -94,7 +94,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="{{ route('login') }}" class="navbar-brand p-0">
-            <h1 class="m-0 text-primary"><img style="width:8%" src="{{asset('frontend/img/logo.png')}}">&nbsp;Otak-otak</h1>
+            <h1 class="m-0 text-primary"><img style="width:15%" src="{{asset('frontend/img/logo.jpg')}}">&nbsp;ingin Tahu</h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
