@@ -204,7 +204,7 @@
                     <div class="bg-secondary d-flex flex-column p-5">
                         <h3 class="text-white">List Pertanyaan</h3>
                             @foreach($pertanyaans as $pertanyaan)
-                                <a href="{{route('pertanyaan.show', [$pertanyaan->id_pertanyaan])}}" style="cursor: default; color: black; text-decoration:none;">
+                                <a href="{{route('pertanyaan.show', [$pertanyaan->kode])}}" style="cursor: default; color: black; text-decoration:none;">
                                 <div class="row pertanyaan" style="background-color:white">
                                     <span><b>{{$pertanyaan->user->username}}</b> - {{$pertanyaan->kategori->kategori}} kelas {{$pertanyaan->kelas->kelas}} - {{$pertanyaan->created_at->diffForHumans()}}</span>
                                     <p style="margin-top:10px;margin-bottom:10px;"><?php echo $pertanyaan['pertanyaan']; ?></p>

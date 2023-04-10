@@ -37,7 +37,7 @@ Route::post('/list', function (Request $request) {
         $pertanyaans = Pertanyaan::where('pertanyaan', 'LIKE', "%{$id}%")->where('status','=','terjawab')->orWhere('status','=','dijawab')->get();
     return view('welcome',compact('kelass', 'kategoris','pertanyaans'));
     }else{
-        $pertanyaans = Pertanyaan::get()->paginate(7);
+        $pertanyaans = Pertanyaan::get();
         return view('welcome',compact('kelass', 'kategoris','pertanyaans'));
     }
 });
