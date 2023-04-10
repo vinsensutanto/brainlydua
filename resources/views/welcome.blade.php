@@ -298,7 +298,7 @@
                                     </select>
                                 </div> --}}
                                 <div class="col-12 col-sm-6">
-                                    <select class="form-select bg-light border-0" name="id_kategori" style="height: 55px;">
+                                    <select class="form-select bg-light border-0" name="id_kategori" style="height: 55px;" required>
                                         <option selected disabled><b>Kategori</b></option>
                                         @if(count(App\Models\Kategori::all())>0)
                                             @foreach($kategoris as $kategori)
@@ -307,10 +307,15 @@
                                         @else
                                                 <option disabled selected value="">-- Tidak ada kategori --</option>
                                         @endif
+                                        @error('id_kategori')
+                                            <span class="invalid-feedback" kelas="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </select>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <select class="form-select bg-light border-0" name="id_kelas" style="height: 55px;">
+                                    <select class="form-select bg-light border-0" name="id_kelas" style="height: 55px;" required>
                                         <option selected disabled><b>kelas</b></option>
                                         @if(count(App\Models\Kelas::all())>0)
                                             @foreach($kelass as $kelas)
@@ -319,6 +324,11 @@
                                         @else
                                                 <option disabled selected value="">-- Tidak ada kelas --</option>
                                         @endif
+                                        @error('id_kelas')
+                                            <span class="invalid-feedback" kelas="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </select>
                                 </div>
                                 

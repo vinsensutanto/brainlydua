@@ -40,6 +40,8 @@ class PertanyaanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
+        'id_kategori'=>'required',
+        'id_kelas'=>'required',
         'pertanyaan'=>['max:1000'],
         'foto'=>['mimes:jpeg,png,jpg'],
         ]);
