@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Otak-otak | Website mirip Brainly</title>
+    <title>ingin Tahu | Tanyakan Pertanyaan Anda!</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -76,14 +76,20 @@
   </style>
 </head>
 <body>
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+     <!-- Navbar Start -->
+     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="{{ route('login') }}" class="navbar-brand p-0">
-            <h1 class="m-0 text-primary"><img style="width:8%" src="{{asset('frontend/img/logo.png')}}">&nbsp;Otak-otak</h1>
+            <h1 class="m-0 text-primary"><img style="width:15%" src="{{asset('frontend/img/logo.jpg')}}">&nbsp;ingin Tahu</h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="/" class="nav-item nav-link active">Home</a>
+                </div>
+            <a href="" data-bs-toggle="modal" data-bs-target="#searchModal" class="btn btn-primary py-2 px-4 ms-3">Cari Pertanyaan yang sudah terjawab!</a>
+        </div>
     </nav>
     <!-- Navbar End -->
 
@@ -99,7 +105,7 @@
                             <form action="/list" method="post">
                                 @csrf
                             <input type="text" name="cari" style="width:100%;" class="form-control bg-transparent border-primary p-3" placeholder="Cari jawabannya!">
-                            <button type="submit" class="btn btn-primary px-4"><i class="bi bi-search"></i></button>
+                            <button type="submit" class="btn btn-primary em-4"><i class="bi bi-search"></i></button>
                             </form>
                         </div>
                     </div>
@@ -229,10 +235,10 @@
         <div class="container pt-5">
             <div class="row g-5 pt-4">
                 <div class="col-lg-3 col-md-6">
-                    <h3 class="text-white mb-4">Get In Touch</h3>
-                    <p class="mb-2"><i class="bi bi-geo-alt text-primary me-2"></i>Jl. Kamal Raya Outer Ring Road No.20, RT.7/RW.14</p>
-                    <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>vinsensutanto@gmail.com</p>
-                    <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>+012 345 67890</p>
+                <h3 class="text-white mb-4">Get In Touch</h3>
+                    <p class="mb-2"></i>Komunitas Ingi Tahu</p>
+                    <p class="mb-2"></i>Pedoman Komunitas</p>
+                    <p class="mb-0"></i>Kebijakan Privasi</p>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h3 class="text-white mb-4">Follow Us</h3>
@@ -250,7 +256,7 @@
         <div class="container">
             <div class="row g-0">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="#">Pengaduan Sekolah</a>. All Rights Reserved.</p>
+                    <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="#">ingin Tahu</a>. All Rights Reserved.</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
                     <p class="mb-0">Designed by <a class="text-white border-bottom" href="https://htmlcodex.com">HTML Codex</a></p>
