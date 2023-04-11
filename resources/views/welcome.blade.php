@@ -206,12 +206,12 @@
                 </div>
                 <div>
                 <div>
-               <center> <div class="col-lg-8 wow zoomIn" data-wow-delay="0.6s">
+               <center> <div class="col-lg-8 wow zoomIn" data-wow-delay="0.8s">
                     <div class="bg-dark d-flex flex-column p-5"  style = "background: rgba(8, 178, 218, .8)!important;">
                         <h3 class="text-white" >List Pertanyaan</h3>
                             @foreach($pertanyaans as $pertanyaan)
                                 <a href="{{route('pertanyaan.show', [$pertanyaan->kode])}}" style="cursor: default; color: black; text-decoration:none;">
-                                <div class="row pertanyaan" style="background-color:white">
+                                <div class="row pertanyaan" style="background-color:white" class="date mb-3 form-group">
                                     <span><b>{{$pertanyaan->user->username}}</b> - {{$pertanyaan->kategori->kategori}} kelas {{$pertanyaan->kelas->kelas}} - {{$pertanyaan->created_at->diffForHumans()}}</span>
                                     <p style="margin-top:10px;margin-bottom:10px;"><?php echo $pertanyaan['pertanyaan']; ?></p>
                                     @if($pertanyaan->status=="menunggu")
