@@ -135,9 +135,9 @@
                         <h6><?php echo $pertanyaans->pertanyaan?></h6>
                         
                         @if($pertanyaans->foto!==NULL)
-                            <img src="{{asset('foto')}}/{{$pertanyaans->foto}}" style="max-width:100px;float:left;margin-right:15px;"/>
+                            <img src="{{asset('foto')}}/{{$pertanyaans->foto}}" id="img1"style="max-width:100px;float:left;margin-right:15px;"/>
                         @else
-                            <img src="{{asset('foto')}}/none.jpg" style="max-width:100px;float:left;margin-right:15px;"/>
+                            <img src="{{asset('foto')}}/none.jpg" id="img1" style="max-width:100px;float:left;margin-right:15px;"/>
                         @endif
                     </div>
                                 @if(empty($jawabans->jawaban))
