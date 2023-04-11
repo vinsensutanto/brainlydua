@@ -54,7 +54,7 @@ class PertanyaanController extends Controller
 
         if($request->hasFile('foto')){
             $foto = $request->file('foto');
-            $namafoto = time().$request->get('id_user').'.'.$foto->getClientOriginalExtension();
+            $namafoto = 'user-image'.time().$request->get('id_user').'.'.$foto->getClientOriginalExtension();
             $destinationPath = public_path('/foto');
             $foto->move($destinationPath,$namafoto);
             }
@@ -102,7 +102,7 @@ class PertanyaanController extends Controller
     
             if($request->hasFile('foto')){
                 $foto = $request->file('foto');
-                $namafoto = time().$request->get('id_user').'.'.$foto->getClientOriginalExtension();
+                $namafoto = 'user-image'.time().$request->get('id_user').'.'.$foto->getClientOriginalExtension();
                 $destinationPath = public_path('/foto');
                 $foto->move($destinationPath,$namafoto);
                 }

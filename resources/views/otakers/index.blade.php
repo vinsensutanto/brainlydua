@@ -135,7 +135,7 @@
                   @foreach($users as $user)
                     <td>{{ $loop->iteration }}</td>
                     <td>
-                      @if($user->foto!="none.png")
+                      @if($user->foto!=NULL)
                         <img style="max-width:100px;"src="{{asset('fotouser')}}/{{$user->foto}}"/>
                       @else
                         <i>Tidak ada foto</i>
