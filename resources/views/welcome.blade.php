@@ -79,7 +79,7 @@
 <body>
       <!-- ======= Hero Section ======= -->
   <section id="hero">
-    <div class="hero-container">
+    <div class="hero-container"style="background-color: rgba(0, 0, 0, 0.7);">
       <div data-aos="fade-in">
         <div class="hero-logo">
           <!-- <img class="" src="{{asset('frontend/assets/img/logo.png')}}" alt="Imperial"> -->
@@ -91,7 +91,7 @@
           <a href="#tanya" class="btn-get-started">Mulai Bertanya Sekarang</a>
           <a href="#jawab" class="btn-services">Coba Jawab Pertanyaan</a>
         </div>
-      </div>
+    </div>
     </div>
   </section><!-- End Hero -->
 

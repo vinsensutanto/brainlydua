@@ -39,10 +39,10 @@ class CreateUsersTable extends Migration
                     'pangkat' => 'awam',
                 ],
                 [
-                    'username' => 'admin',
-                    'email' => 'admin@gmail.com',
+                    'username' => 'siganteng',
+                    'email' => 'siganteng@gmail.com',
                     'rating' => 0,
-                    'password' => Hash::make('admin'),
+                    'password' => Hash::make('Z\LBr#`_."FFt:7T'),
                     'pangkat' => 'admin',
                 ],
             )
