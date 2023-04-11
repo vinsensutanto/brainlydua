@@ -66,7 +66,7 @@
         margin:0px 10px 0px 10px;
         padding:10px;
         width: fit-content;
-        font-size:0.8em;
+        font-size:1vw;
         float:right;
     }
     .qwerty:hover{
@@ -109,22 +109,15 @@
             </div>
             <a href="" data-bs-toggle="modal" data-bs-target="#searchModal" class="btn btn-primary py-2 px-4 ms-3 qwerty">Cari Pertanyaan yang sudah terjawab!</a>
                 
-            @if(Auth::user())
-                <div class="navbar-nav py-0">
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();" class="nav-item nav-link active">Log Out
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                    </a>
-                </div>
-            @endif
-            
-            @if(Route::has('login'))
-                <div class="navbar-nav py-0">
-                    <a href="{{ route('login') }}" class="nav-item nav-link active">Login
-                    </a>
-                </div>
+            @if(Auth::check())
+            <div class="navbar-nav ms-auto py-0">
+                <a href="{{ route('login') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();" class="nav-item nav-link active">Log Out
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+                </a>
+            </div>
             @endif
         </div>
     </nav>
@@ -218,7 +211,7 @@
                         <h3 class="text-white" >List Pertanyaan</h3>
                             @foreach($pertanyaans as $pertanyaan)
                                 <a href="{{route('pertanyaan.show', [$pertanyaan->kode])}}" style="cursor: default; color: black; text-decoration:none;">
-                                <div class="row pertanyaan" style="background-color:white" class="date mb-3 form-group">
+                                <div class="row pertanyaan" style="background-color:white">
                                     <span><b>{{$pertanyaan->user->username}}</b> - {{$pertanyaan->kategori->kategori}} kelas {{$pertanyaan->kelas->kelas}} - {{$pertanyaan->created_at->diffForHumans()}}</span>
                                     <p style="margin-top:10px;margin-bottom:10px;"><?php echo $pertanyaan['pertanyaan']; ?></p>
                                     @if($pertanyaan->status=="menunggu")
@@ -373,17 +366,18 @@
         <div class="container pt-5">
             <div class="row g-5 pt-4">
                 <div class="col-lg-3 col-md-6">
-                    <h3 class="text-white mb-4">Get In Touch</h3>
-                    <p class="mb-2"><i class="bi bi-geo-alt text-primary me-2"></i>Jl. Kamal Raya Outer Ring Road No.20, RT.7/RW.14</p>
-                    <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>@smk.cintakasihtzuchi.sch.id</p>
-                    <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>021 54397462</p>
+                <h3 class="text-white mb-4">Get In Touch</h3>
+                    <p class="mb-2"></i>Komunitas Ingin Tahu</p>
+                    <p class="mb-2"></i>Pedoman Komunitas</p>
+                    <p class="mb-0"></i>Kebijakan Privasi</p>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h3 class="text-white mb-4">Follow Us</h3>
                     <div class="d-flex">
-                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="https://www.facebook.com/smkcintakasihtzuchi/"><i class="fab fa-facebook-f fw-normal"></i></a>
-                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="https://smk.cintakasihtzuchi.sch.id/"><i class="fab fa-google fw-normal"></i></a>
-                        <a class="btn btn-lg btn-primary btn-lg-square rounded" href="https://www.instagram.com/smkcintakasihtzuchi/"><i class="fab fa-instagram fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded" href="#"><i class="fab fa-instagram fw-normal"></i></a>
                     </div>
                 </div>
             </div>
