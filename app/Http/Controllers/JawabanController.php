@@ -17,8 +17,8 @@ class JawabanController extends Controller
     public function index()
     {
         if(Auth::user()->pangkat=="admin"){
-    $jawabans = Jawaban::get();
-    return view('jawaban.index', compact('jawabans'));
+            $jawabans = Jawaban::get();
+            return view('jawaban.index', compact('jawabans'));
         }
     }
 

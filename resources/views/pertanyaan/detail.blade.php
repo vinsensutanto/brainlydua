@@ -76,16 +76,21 @@
   </style>
 </head>
 <body>
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
-        <a href="{{ route('login') }}" class="navbar-brand p-0">
-            <h1 class="m-0 text-primary"><img style="width:8%" src="{{asset('frontend/img/logo.png')}}">&nbsp;Otak-otak</h1>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
-    <!-- Navbar End -->
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+            <a href="{{ route('login') }}" class="navbar-brand p-0">
+                <h1 class="m-0 text-primary"><img style="width:15%" src="{{asset('frontend/img/logo.jpg')}}">&nbsp;ingin Tahu</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="/" class="nav-item nav-link active">Home</a>
+                </div>
+            </div>
+        </nav>
+        <!-- Navbar End -->
 
         <!-- Full Screen Search Start -->
         <div class="modal fade" id="searchModal" tabindex="-1">
@@ -194,7 +199,7 @@
                                     @elseif($pertanyaans->status=='dijawab')
                                         <div class="form-group"><br>
                                             <a href="{{route('jawaban.show',[$jawabans->id_pertanyaan])}}">
-                                                <button class="btn btn-primary">Berikan Jawaban yang lebih baik</button>
+                                                <button class="btn btn-primary" style="font-size:0.8em">Berikan Jawaban yang lebih baik</button>
                                             </a>
                                         </div>
                                     @elseif(!empty($jawabans->jawaban))
@@ -231,16 +236,15 @@
                 <div class="col-lg-3 col-md-6">
                     <h3 class="text-white mb-4">Get In Touch</h3>
                     <p class="mb-2"><i class="bi bi-geo-alt text-primary me-2"></i>Jl. Kamal Raya Outer Ring Road No.20, RT.7/RW.14</p>
-                    <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>vinsensutanto@gmail.com</p>
-                    <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>+012 345 67890</p>
+                    <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>@smk.cintakasihtzuchi.sch.id</p>
+                    <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>021 54397462</p>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h3 class="text-white mb-4">Follow Us</h3>
                     <div class="d-flex">
-                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
-                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
-                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
-                        <a class="btn btn-lg btn-primary btn-lg-square rounded" href="#"><i class="fab fa-instagram fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="https://www.facebook.com/smkcintakasihtzuchi/"><i class="fab fa-facebook-f fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="https://smk.cintakasihtzuchi.sch.id/"><i class="fab fa-google fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded" href="https://www.instagram.com/smkcintakasihtzuchi/"><i class="fab fa-instagram fw-normal"></i></a>
                     </div>
                 </div>
             </div>
@@ -250,10 +254,9 @@
         <div class="container">
             <div class="row g-0">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="#">Pengaduan Sekolah</a>. All Rights Reserved.</p>
+                    <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="#">ingin Tahu</a>. All Rights Reserved.</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <p class="mb-0">Designed by <a class="text-white border-bottom" href="https://htmlcodex.com">HTML Codex</a></p>
                 </div>
             </div>
         </div>
