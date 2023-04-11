@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Otak-otak | Website mirip Brainly</title>
+    <title>ingin Tahu | Tanyakan Pertanyaan Anda!</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -104,7 +104,7 @@
                             <form action="/list" method="post">
                                 @csrf
                             <input type="text" name="cari" style="width:100%;" class="form-control bg-transparent border-primary p-3" placeholder="Cari jawabannya!">
-                            <button type="submit" class="btn btn-primary px-4"><i class="bi bi-search"></i></button>
+                            <button type="submit" class="btn btn-primary em-4"><i class="bi bi-search"></i></button>
                             </form>
                         </div>
                     </div>
