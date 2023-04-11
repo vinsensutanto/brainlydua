@@ -54,6 +54,6 @@ Route::post('/rating/{rating}','RatingController@store');
 Route::post('/komen/{id}','KomenController@store');
 Route::get('/profile', 'UserController@profile');
 
-// Route::match(['get', 'post'], 'register', function(){
-//     return redirect('/');
-//     });
+Route::match(['get', 'post'], 'register', function(){
+    return redirect('/');
+    });
