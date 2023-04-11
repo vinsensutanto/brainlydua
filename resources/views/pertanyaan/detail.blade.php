@@ -126,12 +126,18 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <img src="{{asset('user')}}/{{$pertanyaans->foto}}" style="max-width:50px;float:left;margin-right:15px;"/>
+                        @if($pertanyaans->user->foto!==NULL)
+                            <img src="{{asset('foto')}}/{{$pertanyaans->user->foto}}" style="max-width:20px;float:left;margin-right:15px;"/>
+                        @else
+                            <img src="{{asset('foto')}}/none.jpg" style="max-width:20px;float:left;margin-right:15px;"/>
+                        @endif
                         <p style="font-size:12px;">{{$pertanyaans->user->username}} | {{$pertanyaans->created_at}} - {{$pertanyaans->kategori->kategori}} - Kelas {{$pertanyaans->kelas->kelas}} </p>
                         <h6><?php echo $pertanyaans->pertanyaan?></h6>
                         
-                        @if($pertanyaans->foto!== "none.png")
-                            <img src="{{asset('foto')}}/{{$pertanyaans->foto}}" style="max-width:100px;"/>
+                        @if($pertanyaans->foto!==NULL)
+                            <img src="{{asset('foto')}}/{{$pertanyaans->foto}}" style="max-width:100px;float:left;margin-right:15px;"/>
+                        @else
+                            <img src="{{asset('foto')}}/none.jpg" style="max-width:100px;float:left;margin-right:15px;"/>
                         @endif
                     </div>
                                 @if(empty($jawabans->jawaban))
@@ -143,7 +149,12 @@
                                     @if($jawaban!=null)
                                         @foreach($jawaban as $jawab)
                                         <div class="card-body" style="border:5px solid #b1b1b1;margin-bottom:10px;">
-                                            <img src="{{asset('user')}}/{{$jawab->user->foto}}" style="max-width:50px;float:left;margin-right:15px;"/>
+                                                                    
+                                            @if($jawab->user->foto!==NULL)
+                                                <img src="{{asset('foto')}}/{{$jawab->user->foto}}" style="max-width:20px;float:left;margin-right:15px;"/>
+                                            @else
+                                                <img src="{{asset('foto')}}/none.jpg" style="max-width:20px;float:left;margin-right:15px;"/>
+                                            @endif
                                             <p style="font-size:12px;">{{$jawab->user->username}} | {{$jawab->created_at}}</p>
                                                 <p>
                                                 <b><?php echo $jawab->jawaban ?></b><br/>
