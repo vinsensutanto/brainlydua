@@ -85,6 +85,8 @@
           <!-- <img class="" src="{{asset('frontend/assets/img/logo.png')}}" alt="Imperial"> -->
         </div>
 
+    
+        </div>
         <h1>Selamat Datang di ingin Tahu!</h1>
         <h2>Kami <span class="typed" data-typed-items="Menampung pertanyaan kalian, Mencoba menjawab, Membuka tempat diskusi"></span></h2>
         <div class="actions">
